@@ -1,23 +1,35 @@
 import { auth } from "@/auth";
+import { CardWithForm } from "@/components/CardWithForm";
 import Link from "next/link";
 
 export default async function Home() {
   const session = await auth();
   return (
-    <main className="flex items-center justify-center flex-col gap-4 pt-[10vh] text-white">
-      <h1 className="text-5xl text-center bg-[hsl(0,0%,7%)] p-4 rounded-sm font-semibold">
-        NextJS + MongoDB + Prisma + Auth Template
-      </h1>
-      <p>Session : {session ? session?.user?.email : "No session"}</p>
-      <section className="flex gap-4 flex-col items-center justify-center">
-        <Link href="/sign-in" className="p-2 bg-blue-700 rounded-lg px-6">
-          Sign In
-        </Link>
-
-        <Link href="/dashboard" className="p-2 bg-blue-700 rounded-lg px-6">
-          Dashboard Page (Protected)
-        </Link>
-      </section>
-    </main>
+    <div className="flex justify-center  text-white">
+      <div className=" bg-orange-100  drop-shadow-lg shadow-xl w-[1200px] min-h-[120vh]">
+        <section className="flex flex-col justify-center py-10">
+          <h1 className="text-5xl text-center text-amber-700 p-4 rounded-sm font-bold text-shadow">
+            Diwata Pet Overload
+          </h1>
+        </section>
+        <section className="flex flex-row gap-10 flex-wrap justify-center">
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+          <CardWithForm />
+        </section>
+      </div>
+    </div>
   );
 }
