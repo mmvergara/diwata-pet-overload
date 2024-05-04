@@ -1,32 +1,40 @@
 import { auth } from "@/auth";
-import { CardWithForm } from "@/components/CardWithForm";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const session = await auth();
   return (
-    <div className=" bg-orange-100 drop-shadow-lg shadow-xl min-h-[120vh]">
-      <section className="flex flex-col justify-center py-10">
-        <h1 className="text-5xl text-center text-black p-4 rounded-sm font-bold text-shadow">
-          Diwata Pet Overload
-        </h1>
+    <div className="p-8 sm:p-20 flex items-start justify-center sm:gap-10 flex-wrap">
+      <section>
+        <Image
+          alt="hero"
+          src="/hero.jpg"
+          className="rounded-lg shadow-xl border-orange-300 border-4"
+          width={300}
+          height={300}
+        />
       </section>
-      <section className="flex flex-row gap-10 flex-wrap justify-center">
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
+      <section className="p-4 pt-0">
+        <h1 className="text-lg sm:text-5xl text-black rounded-sm font-bold text-shadow">
+          <span className="text-sm">Elevate Your Pet's Style with</span>
+          <br />
+          <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-300 from-orange-600">
+            Diwata Pet Accessories
+          </span>
+        </h1>
+        <p>Shop the Finest Selection of Handcrafted Pet Accessories Online</p>
+        <div className="mt-8">
+          <Button className="bg-amber-700 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-3xl">
+            <Link href="/home">Shop Now</Link>
+          </Button>
+          <Button
+            variant="link"
+            className="text-amber-700 font-bold py-2 px-4 rounded"
+          >
+            <Link href="/sign-in">Sign In</Link>
+          </Button>
+        </div>
       </section>
     </div>
   );
