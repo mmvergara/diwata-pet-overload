@@ -9,13 +9,19 @@ import {
 } from "@/components/ui/card";
 
 import Image from "next/image";
-import { ShoppingCartIcon } from "lucide-react";
+import {
+  ShoppingCartIcon,
+  StarHalf,
+  StarHalfIcon,
+  StarIcon,
+} from "lucide-react";
 import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
 
 export function CardWithForm() {
   return (
     <Card className="w-[300px] rounded-xl shadow-md">
-      <CardHeader className="p-6`">
+      <CardHeader className="p-6 pb-2">
         <Image
           src="https://utfs.io/f/5d3ca213-6a52-4733-9be3-6ce3fb82f921-g0gqe4.jpg"
           width={300}
@@ -24,14 +30,18 @@ export function CardWithForm() {
           className="rounded-md"
         />
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-6 pt-0 pb-2">
         <div className="flex justify-between">
           <p className="font-bold">Blue Collar</p>
-          <Badge variant={"outline"}>₱ 300.00</Badge>
+          <Badge className="bg-[#6b3614]">₱ 300.00</Badge>
         </div>
-        <span className="text-sm font-semibold opacity-70">
-          This is a blue collar for your pet. It is made of high quality
-        </span>
+        <div className="flex">
+          <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
+          <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
+          <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
+          <StarIcon size={16} className="text-amber-300" />
+          <StarIcon size={16} className="text-amber-300" />
+        </div>
       </CardContent>
       <CardFooter className="flex w-full">
         <Button
