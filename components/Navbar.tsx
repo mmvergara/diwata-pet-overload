@@ -1,12 +1,10 @@
 "use client";
 import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const session = useSession();
-  console.log(session);
   return (
     <nav className="py-2 bg-[#6b3614] text-white flex justify-center items-center px-4 drop-shadow-md shadow-lg">
       <div className="w-full max-w-[1240px] h-[40px] flex justify-between items-center">
