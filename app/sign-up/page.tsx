@@ -14,7 +14,7 @@ export default function SignUpPage() {
   const handleFormSubmit = async (formData: FormData) => {
     setError("");
     const formValues = {
-      username: formData.get("username") as string,
+      username: formData.get("fullName") as string,
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     };
@@ -69,7 +69,7 @@ export default function SignUpPage() {
             pendingText="Creating account..."
             className="p-2 bg-brownPri hover:bg-brownSec rounded-lg"
           >
-            Sign In
+            Sign Up
           </SubmitButton>
         </form>
         <Link
