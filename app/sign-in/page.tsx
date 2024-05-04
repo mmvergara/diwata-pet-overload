@@ -60,7 +60,7 @@ export default function SignInPage() {
         </form>
         <Link
           href="/sign-up"
-          className="text-amber-900 font-semibold hover:underline pb-10"
+          className="text-amber-900 font-semibold hover:underline pb-5"
         >
           Don't have an account? Sign up
         </Link>
