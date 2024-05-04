@@ -1,5 +1,9 @@
 "use client";
 import { SubmitButton } from "@/components/SubmitButton";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { signInAction } from "@/lib/actions";
 import Link from "next/link";
 import { useState } from "react";
@@ -18,43 +22,49 @@ export default function SignInPage() {
   };
 
   return (
-    <main className="flex items-center justify-center flex-col gap-4 pt-[10vh] text-white">
-      <Link
-        href="/"
-        className="bg-[hsl(0,0%,7%)] hover:bg-[hsl(0,0%,10%)] p-2 px-8 rounded-lg"
-      >
-        {"<-"} Home
-      </Link>
-      <h1 className="text-5xl text-center bg-[hsl(0,0%,7%)] p-4 rounded-sm font-semibold">
-        Sign In Page
-      </h1>
-      <p className="text-red-500">{error}</p>
-      <form action={handleFormSubmit} className="flex flex-col gap-2">
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          className="p-2 px-4 rounded-md outline-none drop-shadow-sm bg-[hsl(0,0%,10%)]"
-          required
-        />
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="●●●●●●●"
-          className="p-2 px-4 rounded-md outline-none drop-shadow-sm bg-[hsl(0,0%,10%)]"
-        />
-        <SubmitButton
-          pendingText="Signing in..."
-          className="p-2 bg-[hsl(0,0%,7%)] rounded-lg"
+    <main className="flex items-center justify-center pt-[10vh] ">
+      <div className="flex items-center justify-center flex-col glass p-8 gap-4">
+        <div className="text-md flex items-center flex-col sm:text-4xl font-bold ">
+          <h1 className="text-sm ">Diwata Pet Overload </h1>
+          <Separator className="bg-black" />
+          <span>Sign In</span>
+        </div>
+        <p className="text-red-500">{error}</p>
+        <form
+          action={handleFormSubmit}
+          className="flex flex-col gap-2 w-[300px]"
         >
-          Sign In
-        </SubmitButton>
-      </form>
-      <Link href="/sign-up" className="text-gray-400">
-        Don't have an account? Sign up
-      </Link>
+          <Label htmlFor="email">Email</Label>
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="hello@example.com"
+            className="p-2 px-4 rounded-md outline-none drop-shadow-sm"
+            required
+          />
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="●●●●●●●"
+            className="p-2 px-4 rounded-md outline-none drop-shadow-sm"
+          />
+          <SubmitButton
+            pendingText="Signing in..."
+            className="p-2 bg-brownPri hover:bg-brownSec rounded-lg"
+          >
+            Sign In
+          </SubmitButton>
+        </form>
+        <Link
+          href="/sign-up"
+          className="text-amber-900 font-semibold hover:underline pb-10"
+        >
+          Don't have an account? Sign up
+        </Link>
+      </div>
     </main>
   );
 }
