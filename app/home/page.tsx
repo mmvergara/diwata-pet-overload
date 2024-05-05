@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 
 export default async function Home() {
   return (
-    <div className=" bg-orange-100 drop-shadow-lg shadow-xl min-h-[120vh]">
+    <div className=" bg-orange-100 mb-[80px]">
       <section className="flex flex-col items-center relative overflow-hidden border-white h-[250px]">
         <div className="blur-xl bg-gradient-to-t from-amber-200 to-orange-500 h-[250px] top-[-35px] w-[120vw] absolute "></div>
         <div className="absolute flex flex-col items-center">
