@@ -2,7 +2,7 @@
  * Public routes
  * @type {string[]}
  */
-export const publicRoutes = ["/", "/sign-in", "/sign-up"];
+export const publicRoutes = ["/", "/home", "/sign-in", "/sign-up"];
 
 export const authRoutes = ["/sign-in", "/sign-up"];
 
