@@ -4,44 +4,44 @@ import { Input } from "@/components/ui/input";
 
 export default async function Home() {
   return (
-    <div className=" bg-orange-100 mb-[80px]">
-      <section className="flex flex-col items-center relative overflow-hidden border-white h-[250px]">
-        <div className="blur-xl bg-gradient-to-t from-amber-200 to-orange-500 h-[250px] top-[-35px] w-[120vw] absolute "></div>
+    <div className=" mb-[80px] bg-orange-100">
+      <section className="relative flex h-[250px] flex-col items-center overflow-hidden border-white">
+        <div className="absolute top-[-35px] h-[250px] w-[120vw] bg-gradient-to-t from-amber-200 to-orange-500 blur-xl "></div>
         <div className="absolute flex flex-col items-center">
-          <h1 className="text-lg text-center sm:text-5xl text-white rounded-sm font-bold text-shadow">
+          <h1 className="text-shadow rounded-sm text-center text-lg font-bold text-white sm:text-5xl">
             <br />
             <span className="font-extrabold text-white">
               Diwata Pet Accessories
             </span>
           </h1>
-          <p className="text-center text-white font-semibold">
+          <p className="text-center font-semibold text-white">
             Shop the Finest Selection of Handcrafted Pet Accessories Online
           </p>
           <Input
             placeholder="Search for products"
-            className="rounded-3xl w-[200px] mt-4"
+            className="mt-4 w-[200px] rounded-3xl"
           />
         </div>
       </section>
-      <div className="flex items-center justify-center mb-4 font-semibold px-8 ">
-        <p className="bg-white flex gap-2 w-max p-4 rounded-md py-2 bg-gradient-to-t from-amber-400 to-orange-500 text-white">
+      <div className="mb-4 flex items-center justify-center px-8 font-semibold ">
+        <p className="flex w-max gap-2 rounded-md bg-white bg-gradient-to-t from-amber-400 to-orange-500 p-4 py-2 text-white">
           <StarsIcon /> Best Sellers
           <StarsIcon />
         </p>
       </div>
-      <section className="flex flex-row flex-wrap justify-center gap-10 mb-10 px-4 ">
+      <section className="mb-10 flex flex-row flex-wrap justify-center gap-10 px-4 ">
         <ProductCard />
         <ProductCard />
         <ProductCard />
         <ProductCard />
       </section>
-      <div className="flex items-center justify-center text-md mb-4 font-semibold px-8 ">
-        <p className="bg-white flex gap-2 w-max p-4 rounded-md py-2 bg-gradient-to-t from-amber-400 to-orange-500 text-white">
+      <div className="text-md mb-4 flex items-center justify-center px-8 font-semibold ">
+        <p className="flex w-max gap-2 rounded-md bg-white bg-gradient-to-t from-amber-400 to-orange-500 p-4 py-2 text-white">
           <StarsIcon /> Recommended For You
           <StarsIcon />
         </p>
       </div>
-      <section className="flex flex-row justify-center gap-10 mb-4 flex-wrap px-4 ">
+      <section className="mb-4 flex flex-row flex-wrap justify-center gap-10 px-4 ">
         <ProductCard />
         <ProductCard />
         <ProductCard />

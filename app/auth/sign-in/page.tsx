@@ -23,8 +23,8 @@ export default function SignInPage() {
 
   return (
     <main className="flex items-center justify-center pt-[10vh] ">
-      <div className="flex items-center justify-center flex-col glass p-8 gap-4">
-        <div className="text-md flex items-center flex-col sm:text-4xl font-bold ">
+      <div className="glass flex flex-col items-center justify-center gap-4 p-8">
+        <div className="text-md flex flex-col items-center font-bold sm:text-4xl ">
           <h1 className="text-sm ">Diwata Pet Overload </h1>
           <Separator className="bg-black" />
           <span>Sign In</span>
@@ -32,7 +32,7 @@ export default function SignInPage() {
         <p className="text-red-500">{error}</p>
         <form
           action={handleFormSubmit}
-          className="flex flex-col gap-2 w-[300px]"
+          className="flex w-[300px] flex-col gap-2"
         >
           <Label htmlFor="email">Email</Label>
           <Input
@@ -40,7 +40,7 @@ export default function SignInPage() {
             id="email"
             name="email"
             placeholder="hello@example.com"
-            className="p-2 px-4 rounded-md outline-none drop-shadow-sm"
+            className="rounded-md p-2 px-4 outline-none drop-shadow-sm"
             required
           />
           <Label htmlFor="password">Password</Label>
@@ -49,18 +49,18 @@ export default function SignInPage() {
             name="password"
             type="password"
             placeholder="●●●●●●●"
-            className="p-2 px-4 rounded-md outline-none drop-shadow-sm"
+            className="rounded-md p-2 px-4 outline-none drop-shadow-sm"
           />
           <SubmitButton
             pendingText="Signing in..."
-            className="p-2 bg-brownPri hover:bg-brownSec rounded-lg"
+            className="rounded-lg bg-brownPri p-2 hover:bg-brownSec"
           >
             Sign In
           </SubmitButton>
         </form>
         <Link
           href="/auth/sign-up"
-          className="text-amber-900 font-semibold hover:underline pb-5"
+          className="pb-5 font-semibold text-amber-900 hover:underline"
         >
           Don't have an account? Sign up
         </Link>

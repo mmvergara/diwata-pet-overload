@@ -4,32 +4,32 @@ import Link from "next/link";
 
 export default async function Home() {
   return (
-    <div className="p-8 sm:p-20 flex items-start justify-center sm:gap-10 flex-wrap">
+    <div className="flex flex-wrap items-start justify-center p-8 sm:gap-10 sm:p-20">
       <section>
         <Image
           alt="hero"
           src="/hero.jpg"
-          className="rounded-lg shadow-xl border-orange-300 border-4"
+          className="rounded-lg border-4 border-orange-300 shadow-xl"
           width={300}
           height={300}
         />
       </section>
       <section className="p-4 pt-0">
-        <h1 className="text-lg sm:text-5xl text-black rounded-sm font-bold text-shadow">
+        <h1 className="text-shadow rounded-sm text-lg font-bold text-black sm:text-5xl">
           <span className="text-sm">Elevate Your Pet's Style with</span>
           <br />
-          <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-300 from-orange-600">
+          <span className="bg-gradient-to-r from-orange-600 to-amber-300 bg-clip-text font-extrabold text-transparent">
             Diwata Pet Accessories
           </span>
         </h1>
         <p>Shop the Finest Selection of Handcrafted Pet Accessories Online</p>
         <div className="mt-8">
-          <Button className="bg-amber-700 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-3xl">
+          <Button className="rounded-3xl bg-amber-700 px-4 py-2 font-bold text-white hover:bg-amber-600">
             <Link href="/home">Shop Now</Link>
           </Button>
           <Button
             variant="link"
-            className="text-amber-700 font-bold py-2 px-4 rounded"
+            className="rounded px-4 py-2 font-bold text-amber-700"
           >
             <Link href="/auth/sign-in">Sign In</Link>
           </Button>

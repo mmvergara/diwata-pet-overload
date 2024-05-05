@@ -6,11 +6,11 @@ import Link from "next/link";
 const DashboardPage = async () => {
   const session = await auth();
   return (
-    <main className="flex items-center justify-center flex-wrap gap-4 pt-[10vh] text-white">
+    <main className="flex flex-wrap items-center justify-center gap-4 pt-[10vh] text-white">
       <Link href="/cart">
-        <Card className="w-[250px] min-h-[150px] hover:scale-105 transition-all cursor-pointer">
+        <Card className="min-h-[150px] w-[250px] cursor-pointer transition-all hover:scale-105">
           <CardHeader className="pb-2">
-            <h1 className="text-3xl font-semibold text-brownPri flex items-center gap-2">
+            <h1 className="flex items-center gap-2 text-3xl font-semibold text-brownPri">
               My Cart <ShoppingCart />
             </h1>
           </CardHeader>
@@ -22,9 +22,9 @@ const DashboardPage = async () => {
         </Card>
       </Link>
       <Link href="/orders">
-        <Card className="w-[250px] min-h-[150px] hover:scale-105 transition-all cursor-pointer">
+        <Card className="min-h-[150px] w-[250px] cursor-pointer transition-all hover:scale-105">
           <CardHeader className="pb-2">
-            <h1 className="text-3xl font-semibold text-brownPri flex items-center gap-2">
+            <h1 className="flex items-center gap-2 text-3xl font-semibold text-brownPri">
               Orders <ListOrdered />
             </h1>
           </CardHeader>
@@ -37,9 +37,9 @@ const DashboardPage = async () => {
       </Link>
       {/* Profile */}
       <Link href="/profile">
-        <Card className="w-[250px] min-h-[150px] hover:scale-105 transition-all cursor-pointer">
+        <Card className="min-h-[150px] w-[250px] cursor-pointer transition-all hover:scale-105">
           <CardHeader className="pb-2">
-            <h1 className="text-3xl font-semibold text-brownPri  flex items-center gap-2">
+            <h1 className="flex items-center gap-2  text-3xl font-semibold text-brownPri">
               Profile <CircleUserRound />
             </h1>
           </CardHeader>
