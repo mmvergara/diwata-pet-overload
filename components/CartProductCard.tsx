@@ -8,20 +8,17 @@ import {
 } from "@/components/ui/card";
 
 import Image from "next/image";
-import {
-  ShoppingCartIcon,
-  StarIcon,
-} from "lucide-react";
+import { ShoppingCartIcon, StarIcon } from "lucide-react";
 import { Badge } from "./ui/badge";
 
 type Props = {
   onUpdateQuantity: () => void;
   onRemoveProductToCart: () => void;
-}
+};
 
 export function ProductCard() {
   return (
-    <Card className="w-[300px] rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all cursor-pointer">
+    <Card className="w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
       <CardHeader
         className="p-6 pb-2"
         onClick={() => {
@@ -37,7 +34,7 @@ export function ProductCard() {
         />
       </CardHeader>
       <CardContent
-        className="p-6 pt-0 pb-2"
+        className="p-6 pb-2 pt-0"
         onClick={() => {
           console.log("clicked card");
         }}
@@ -57,7 +54,7 @@ export function ProductCard() {
       <CardFooter className="flex w-full">
         <Button
           variant="secondary"
-          className="w-full bg-[hsl(240,5%,92%)] hover:bg-[hsl(240,5%,85%)] font-semibold"
+          className="w-full bg-[hsl(240,5%,92%)] font-semibold hover:bg-[hsl(240,5%,85%)]"
           onClick={() => {
             console.log("clicked add to cart");
           }}

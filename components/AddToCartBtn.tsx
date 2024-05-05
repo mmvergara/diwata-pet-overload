@@ -38,14 +38,14 @@ export function AddToCardBtn({ children, productID, ...props }: Props) {
         `w-full font-semibold`,
         added
           ? `bg-emerald-600 text-white hover:bg-emerald-500`
-          : `bg-[hsl(240,5%,92%)] hover:bg-[hsl(240,5%,85%)] text-black`
+          : `bg-[hsl(240,5%,92%)] text-black hover:bg-[hsl(240,5%,85%)]`,
       )}
     >
       {added
         ? "Added to Cart!"
         : pending
-        ? "Adding To Cart . .  ."
-        : "Add to Cart"}
+          ? "Adding To Cart . .  ."
+          : "Add to Cart"}
       {added ? (
         <CircleCheckIcon size={20} className="ml-2" />
       ) : (

@@ -7,8 +7,8 @@ import Link from "next/link";
 const Navbar: React.FC = () => {
   const session = useSession();
   return (
-    <nav className="py-2 bg-[#6b3614] text-white flex justify-center items-center px-4 drop-shadow-md shadow-lg">
-      <div className="w-full max-w-[1240px] h-[40px] flex justify-between items-center">
+    <nav className="flex items-center justify-center bg-[#6b3614] px-4 py-2 text-white shadow-lg drop-shadow-md">
+      <div className="flex h-[40px] w-full max-w-[1240px] items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
           logo
         </Link>
@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
               <Link href="/auth/sign-in">
                 <Button
                   variant="outline"
-                  className="ml-4 text-black shadow-md font-bold"
+                  className="ml-4 font-bold text-black shadow-md"
                 >
                   Sign In
                 </Button>
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
             <Link href="/u/cart">
               <Button
                 variant="outline"
-                className="ml-4 text-black shadow-md font-bold rounded-full h-[35px] w-[35px] p-[8px]"
+                className="ml-4 h-[35px] w-[35px] rounded-full p-[8px] font-bold text-black shadow-md"
               >
                 <ShoppingCart className="text-brownPri hover:text-brownSec" />
               </Button>

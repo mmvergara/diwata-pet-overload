@@ -15,7 +15,7 @@ import { AddToCardBtn } from "./AddToCartBtn";
 
 export function ProductCard() {
   return (
-    <Card className="min-w-[300px] min-h-[333px] rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all cursor-pointer">
+    <Card className="min-h-[333px] min-w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
       <Link href="/product/1">
         <CardHeader
           className="p-6 pb-2"
@@ -34,7 +34,7 @@ export function ProductCard() {
       </Link>
       <Link href="/product/1">
         <CardContent
-          className="p-6 pt-0 pb-2"
+          className="p-6 pb-2 pt-0"
           onClick={() => {
             console.log("clicked card");
           }}
