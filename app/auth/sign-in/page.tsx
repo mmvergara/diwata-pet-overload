@@ -59,7 +59,7 @@ export default function SignInPage() {
           </SubmitButton>
         </form>
         <Link
-          href="/sign-up"
+          href="/auth/sign-up"
           className="text-amber-900 font-semibold hover:underline pb-5"
         >
           Don't have an account? Sign up

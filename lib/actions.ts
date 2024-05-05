@@ -49,5 +49,5 @@ export const signUpAction = async (signUpValues: SignUpValues) => {
     }
     return { error: "An error occurred" };
   }
-  redirect("/sign-in");
+  redirect("/auth/sign-in");
 };

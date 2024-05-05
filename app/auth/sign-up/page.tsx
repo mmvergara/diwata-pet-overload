@@ -73,7 +73,7 @@ export default function SignUpPage() {
           </SubmitButton>
         </form>
         <Link
-          href="/sign-in"
+          href="/auth/sign-in"
           className="text-amber-900 font-semibold hover:underline pb-5"
         >
           I already have an account

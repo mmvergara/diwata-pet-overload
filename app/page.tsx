@@ -32,7 +32,7 @@ export default async function Home() {
             variant="link"
             className="text-amber-700 font-bold py-2 px-4 rounded"
           >
-            <Link href="/sign-in">Sign In</Link>
+            <Link href="/auth/sign-in">Sign In</Link>
           </Button>
         </div>
       </section>

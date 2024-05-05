@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
         {session.status !== "loading" && (
           <div className="font-semibold">
             {session.status === "unauthenticated" && (
-              <Link href="/sign-in">
+              <Link href="/auth/sign-in">
                 <Button
                   variant="outline"
                   className="ml-4 text-black shadow-md font-bold"
