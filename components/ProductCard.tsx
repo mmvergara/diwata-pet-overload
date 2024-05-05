@@ -11,6 +11,7 @@ import Image from "next/image";
 import { ShoppingCartIcon, StarIcon } from "lucide-react";
 import { Badge } from "./ui/badge";
 import Link from "next/link";
+import { AddToCardBtn } from "./AddToCartBtn";
 
 export function ProductCard() {
   return (
@@ -53,15 +54,7 @@ export function ProductCard() {
       </Link>
 
       <CardFooter className="flex w-full">
-        <Button
-          variant="secondary"
-          className="w-full bg-[hsl(240,5%,92%)] hover:bg-[hsl(240,5%,85%)] font-semibold"
-          onClick={() => {
-            console.log("clicked add to cart");
-          }}
-        >
-          Add to Cart <ShoppingCartIcon size={16} className="ml-2" />
-        </Button>
+        <AddToCardBtn productID="1" />
       </CardFooter>
     </Card>
   );
