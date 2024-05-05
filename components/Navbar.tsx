@@ -1,4 +1,5 @@
 "use client";
+import { ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -8,7 +9,9 @@ const Navbar: React.FC = () => {
   return (
     <nav className="py-2 bg-[#6b3614] text-white flex justify-center items-center px-4 drop-shadow-md shadow-lg">
       <div className="w-full max-w-[1240px] h-[40px] flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold">logo</Link>
+        <Link href="/" className="text-2xl font-bold">
+          logo
+        </Link>
         {session.status !== "loading" && (
           <div className="font-semibold">
             {session.status === "unauthenticated" && (
@@ -21,6 +24,14 @@ const Navbar: React.FC = () => {
                 </Button>
               </Link>
             )}
+            <Link href="/u/cart">
+              <Button
+                variant="outline"
+                className="ml-4 text-black shadow-md font-bold rounded-full h-[35px] w-[35px] p-[8px]"
+              >
+                <ShoppingCart className="text-brownPri hover:text-brownSec" />
+              </Button>
+            </Link>
           </div>
         )}
       </div>
