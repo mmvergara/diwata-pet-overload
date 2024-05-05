@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { ProductCard } from "@/components/CardWithForm";
+import { ProductCard } from "@/components/ProductCard";
 
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";

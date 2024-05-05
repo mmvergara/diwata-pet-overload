@@ -10,8 +10,6 @@ import {
 import Image from "next/image";
 import {
   ShoppingCartIcon,
-  StarHalf,
-  StarHalfIcon,
   StarIcon,
 } from "lucide-react";
 import { Badge } from "./ui/badge";
