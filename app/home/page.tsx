@@ -1,32 +1,60 @@
 import { auth } from "@/auth";
-import { CardWithForm } from "@/components/CardWithForm";
-import Link from "next/link";
+import { ProductCard } from "@/components/CardWithForm";
+
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { StarsIcon } from "lucide-react";
 
 export default async function Home() {
   const session = await auth();
   return (
     <div className=" bg-orange-100 drop-shadow-lg shadow-xl min-h-[120vh]">
-      <section className="flex flex-col justify-center py-10">
-        <h1 className="text-5xl text-center text-black p-4 rounded-sm font-bold text-shadow">
-          Diwata Pet Overload
-        </h1>
+      <section className="flex flex-col items-center relative overflow-hidden border-white h-[250px]">
+        <div className="blur-xl bg-gradient-to-t from-amber-200 to-orange-500 h-[250px] top-[-35px] w-[120vw] absolute "></div>
+        <div className="absolute flex flex-col items-center">
+          <h1 className="text-lg text-center sm:text-5xl text-white rounded-sm font-bold text-shadow">
+            <br />
+            <span className="font-extrabold text-white">
+              Diwata Pet Accessories
+            </span>
+          </h1>
+          <p className="text-center text-white font-semibold">
+            Shop the Finest Selection of Handcrafted Pet Accessories Online
+          </p>
+          <Input
+            placeholder="Search for products"
+            className="rounded-3xl w-[200px] mt-4"
+          />
+        </div>
       </section>
-      <section className="flex flex-row gap-10 flex-wrap justify-center">
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
-        <CardWithForm />
+      <div className="text-md mb-4 font-semibold px-8 ">
+        <p className="bg-white flex gap-2 w-max p-4 rounded-md py-2 bg-gradient-to-t from-amber-400 to-orange-500 text-white">
+          <StarsIcon /> Best Sellers
+          <StarsIcon />
+        </p>
+      </div>
+      <section className="flex flex-row justify-center gap-10 mb-10 flex-wrap px-4">
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+      </section>
+      <div className="text-md mb-4 font-semibold px-8 ">
+        <p className="bg-white flex gap-2 w-max p-4 rounded-md py-2 bg-gradient-to-t from-amber-400 to-orange-500 text-white">
+          <StarsIcon /> Recommended For You
+          <StarsIcon />
+        </p>
+      </div>
+      <section className="flex flex-row justify-center gap-10 mb-4 flex-wrap px-4 ">
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
       </section>
     </div>
   );
