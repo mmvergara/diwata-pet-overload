@@ -23,7 +23,7 @@ export const signInAction = async (signInValues: SignInValues) => {
     }
     throw error;
   }
-  redirect("/dashboard");
+  redirect("/u/dashboard");
 };
 
 export const signUpAction = async (signUpValues: SignUpValues) => {
