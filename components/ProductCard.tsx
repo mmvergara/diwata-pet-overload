@@ -16,7 +16,7 @@ import { Badge } from "./ui/badge";
 
 export function ProductCard() {
   return (
-    <Card className="w-[300px] rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all cursor-pointer">
+    <Card className="min-w-[300px] min-h-[333px] rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition-all cursor-pointer">
       <CardHeader
         className="p-6 pb-2"
         onClick={() => {

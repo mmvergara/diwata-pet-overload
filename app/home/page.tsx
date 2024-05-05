@@ -1,12 +1,8 @@
-import { auth } from "@/auth";
 import { ProductCard } from "@/components/ProductCard";
-
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import { StarsIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 export default async function Home() {
-  const session = await auth();
   return (
     <div className=" bg-orange-100 drop-shadow-lg shadow-xl min-h-[120vh]">
       <section className="flex flex-col items-center relative overflow-hidden border-white h-[250px]">
@@ -27,19 +23,19 @@ export default async function Home() {
           />
         </div>
       </section>
-      <div className="text-md mb-4 font-semibold px-8 ">
+      <div className="flex items-center justify-center mb-4 font-semibold px-8 ">
         <p className="bg-white flex gap-2 w-max p-4 rounded-md py-2 bg-gradient-to-t from-amber-400 to-orange-500 text-white">
           <StarsIcon /> Best Sellers
           <StarsIcon />
         </p>
       </div>
-      <section className="flex flex-row justify-center gap-10 mb-10 flex-wrap px-4">
+      <section className="flex flex-row flex-wrap justify-center gap-10 mb-10 px-4 ">
         <ProductCard />
         <ProductCard />
         <ProductCard />
         <ProductCard />
       </section>
-      <div className="text-md mb-4 font-semibold px-8 ">
+      <div className="flex items-center justify-center text-md mb-4 font-semibold px-8 ">
         <p className="bg-white flex gap-2 w-max p-4 rounded-md py-2 bg-gradient-to-t from-amber-400 to-orange-500 text-white">
           <StarsIcon /> Recommended For You
           <StarsIcon />
