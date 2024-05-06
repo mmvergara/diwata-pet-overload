@@ -54,7 +54,7 @@ export function CartProductCard() {
       <CardFooter className="flex w-full">
         <Button
           variant="secondary"
-          className="w-full bg-[hsl(240,5%,92%)] font-semibold hover:bg-[hsl(240,5%,85%)]"
+          className="bg-btnWhitePri hover:bg-btnWhiteSec w-full font-semibold"
           onClick={() => {
             console.log("clicked add to cart");
           }}
