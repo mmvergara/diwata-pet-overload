@@ -21,6 +21,10 @@ model User {
   accounts      Account[]
   role          ROLE           @default(USER)
 
+  fullAddress   String?
+  phoneNumber   String?
+
+
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -74,7 +78,7 @@ model Product {
   price       Int
   image       String
   stock       Int
-  category    CATEGORY
+  categoy    CATEGORY
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
