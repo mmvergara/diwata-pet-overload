@@ -65,7 +65,7 @@ const ProductPage = () => {
           </div>
         </div>
       </Card>
-      <Card className="mx-4 flex w-full max-w-[1000px] flex-col justify-center p-4">
+      <Card className="mx-4 mb-10 flex w-full max-w-[1000px] flex-col justify-center p-4">
         <h2 className="text-3xl font-bold text-brownPri">Reviews:</h2>
         <p className="mb-6 font-medium opacity-70">
           Here are some reviews from customers who have bought the product.
