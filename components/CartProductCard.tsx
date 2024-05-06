@@ -33,7 +33,10 @@ export function CartProductCard() {
           console.log("clicked card");
         }}
       >
-        <p className="font-bold hover:underline">Blue Collar</p>
+        <div className="flex items-center justify-between">
+          <p className="font-bold hover:underline">Blue Collar</p>
+          <span className="text-xs font-semibold opacity-70">Stock 20</span>
+        </div>
         <Image
           src="https://utfs.io/f/5d3ca213-6a52-4733-9be3-6ce3fb82f921-g0gqe4.jpg"
           width={300}
