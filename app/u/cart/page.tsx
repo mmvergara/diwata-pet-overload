@@ -22,11 +22,6 @@ const CartPage = () => {
         <CartProductCard />
         <CartProductCard />
         <CartProductCard />
-        <CartProductCard />
-        <CartProductCard />
-        <CartProductCard />
-        <CartProductCard />
-        <CartProductCard />
       </section>
     </main>
   );
