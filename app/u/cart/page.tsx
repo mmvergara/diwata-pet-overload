@@ -2,6 +2,7 @@ import { CartProductCard } from "@/components/CartProductCard";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ShoppingBag } from "lucide-react";
+import Link from "next/link";
 
 const CartPage = () => {
   return (
@@ -13,10 +14,12 @@ const CartPage = () => {
         <div className="grow rounded-md bg-slate-100 p-2 font-semibold">
           Checkout Price: 200,000.00
         </div>
-        <Button className="grow">
-          Checkout
-          <ShoppingBag size={16} className="ml-2" />
-        </Button>
+        <Link href="/u/checkout" className="w-full grow">
+          <Button className="w-full grow">
+            Checkout
+            <ShoppingBag size={16} className="ml-2" />
+          </Button>
+        </Link>
       </Card>
       <section className="flex flex-wrap justify-center gap-4">
         <CartProductCard />
