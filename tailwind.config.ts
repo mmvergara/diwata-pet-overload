@@ -24,6 +24,8 @@ const config = {
         brownSec: "hsl(34,88%,30%)",
         creamPri: "#fcead2",
         creamSec: "#fdf4e7",
+        btnWhitePri: "#eaeaec",
+        btnWhiteSec: "#d7d7db",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
