@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 const UserReview = () => {
   return (
     <article className="[-2] mb-4 flex flex-row gap-2 rounded-md border-[1px] border-gray-200 p-4">
-      <div>
+      <div className="mt-1">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
