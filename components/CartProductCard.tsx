@@ -16,7 +16,7 @@ type Props = {
   onRemoveProductToCart: () => void;
 };
 
-export function ProductCard() {
+export function CartProductCard() {
   return (
     <Card className="w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
       <CardHeader
