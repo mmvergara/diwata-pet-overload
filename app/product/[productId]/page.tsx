@@ -1,4 +1,5 @@
 "use client";
+import UserReview from "@/components/UserReview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,7 +9,7 @@ import Image from "next/image";
 const ProductPage = () => {
   return (
     <main className="flex flex-wrap items-center justify-center gap-4 pt-[10vh] text-white">
-      <Card className="mx-4 flex w-full max-w-[1000px]  flex-col  items-center justify-center gap-4 p-4 md:flex-row md:items-start ">
+      <Card className="mx-4 flex w-full max-w-[1000px] flex-col items-center justify-center gap-4 p-4 md:flex-row md:items-start">
         <Image
           src="/hero.jpg"
           width={300}
@@ -16,7 +17,7 @@ const ProductPage = () => {
           alt="hero"
           className="rounded-lg border-4 border-orange-300 shadow-xl"
         />
-        <section className="flex flex-col justify-between sm:h-[300px]">
+        <div className="flex flex-col justify-between sm:h-[300px]">
           <div>
             <h2 className="text-3xl font-bold text-brownPri">Blue Collar</h2>
 
@@ -62,7 +63,17 @@ const ProductPage = () => {
               </Button>
             </div>
           </div>
-        </section>
+        </div>
+      </Card>
+      <Card className="mx-4 flex w-full max-w-[1000px] flex-col justify-center p-4">
+        <h2 className="text-3xl font-bold text-brownPri">Reviews:</h2>
+        <p className="mb-6 font-medium opacity-70">
+          Here are some reviews from customers who have bought the product.
+        </p>
+        <UserReview />
+        <UserReview />
+        <UserReview />
+        <UserReview />
       </Card>
     </main>
   );
