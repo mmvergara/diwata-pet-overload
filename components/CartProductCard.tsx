@@ -8,7 +8,15 @@ import {
 } from "@/components/ui/card";
 
 import Image from "next/image";
-import { ShoppingCartIcon, StarIcon } from "lucide-react";
+import {
+  CircleMinus,
+  CircleMinusIcon,
+  CirclePlus,
+  ShoppingCartIcon,
+  StarIcon,
+  Trash,
+  Trash2,
+} from "lucide-react";
 import { Badge } from "./ui/badge";
 
 type Props = {
@@ -18,13 +26,14 @@ type Props = {
 
 export function CartProductCard() {
   return (
-    <Card className="w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
+    <Card className="w-[250px] cursor-pointer rounded-xl  shadow-md transition-all hover:scale-105 hover:shadow-xl">
       <CardHeader
-        className="p-6 pb-2"
+        className="p-6 pb-2 pt-[10px]"
         onClick={() => {
           console.log("clicked card");
         }}
       >
+        <p className="font-bold hover:underline">Blue Collar</p>
         <Image
           src="https://utfs.io/f/5d3ca213-6a52-4733-9be3-6ce3fb82f921-g0gqe4.jpg"
           width={300}
@@ -38,28 +47,28 @@ export function CartProductCard() {
         onClick={() => {
           console.log("clicked card");
         }}
-      >
-        <div className="flex justify-between">
-          <p className="font-bold hover:underline">Blue Collar</p>
-          <Badge className="bg-brownPri hover:bg-brownSec">₱ 300.00</Badge>
-        </div>
-        <div className="flex">
-          <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-          <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-          <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-          <StarIcon size={16} className="text-amber-300" />
-          <StarIcon size={16} className="text-amber-300" />
-        </div>
-      </CardContent>
-      <CardFooter className="flex w-full">
+      ></CardContent>
+      <CardFooter className="flex w-full gap-2">
+        <div className="bg-btnWhitePri flex grow rounded-md p-2 text-center text-xs font-medium">
+          Quantity: 12
+        </div>{" "}
         <Button
-          variant="secondary"
-          className="bg-btnWhitePri hover:bg-btnWhiteSec w-full font-semibold"
-          onClick={() => {
-            console.log("clicked add to cart");
-          }}
+          variant="outline"
+          className="h-[30px] w-[30px] rounded-full p-[8px] font-bold text-black"
         >
-          Add to Cart <ShoppingCartIcon size={16} className="ml-2" />
+          <CirclePlus className="text-emerald-500 hover:text-emerald-600" />
+        </Button>{" "}
+        <Button
+          variant="outline"
+          className="h-[30px] w-[30px] rounded-full p-[8px] font-bold text-black"
+        >
+          <CircleMinus className="text-red-500 hover:text-red-600" />
+        </Button>{" "}
+        <Button
+          variant="outline"
+          className="h-[30px] w-[30px] rounded-full p-[8px] font-bold text-black"
+        >
+          <Trash2 className="text-red-500 hover:text-red-600" />
         </Button>
       </CardFooter>
     </Card>
