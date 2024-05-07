@@ -1,14 +1,8 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
 import { useState, type ComponentProps } from "react";
 import { Button } from "./ui/button";
-import { useSession } from "next-auth/react";
-import {
-  CheckCheckIcon,
-  CircleCheckIcon,
-  ShoppingCartIcon,
-} from "lucide-react";
+import { CircleCheckIcon, ShoppingCartIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Props = ComponentProps<"button"> & {
@@ -16,7 +10,6 @@ type Props = ComponentProps<"button"> & {
 };
 
 export function AddToCardBtn({ children, productID, ...props }: Props) {
-  const session = useSession();
   const [pending, setPending] = useState(false);
   const [added, setAdded] = useState(false);
 
