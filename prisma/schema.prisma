@@ -78,6 +78,7 @@ model Product {
   price       Int
   image       String
   stock       Int
+  sold        Int
   category     CATEGORY
 
   createdAt   DateTime @default(now())
