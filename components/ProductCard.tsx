@@ -26,7 +26,7 @@ export function ProductCard() {
           <Image
             src="https://utfs.io/f/5d3ca213-6a52-4733-9be3-6ce3fb82f921-g0gqe4.jpg"
             width={300}
-            height={200}
+            height={300}
             alt="Project Image"
             className="rounded-md"
           />
