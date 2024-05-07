@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 
 const ProductPage = async ({ params }: { params: { productId: string } }) => {
   const product = await getProductById(params.productId);
+  console.log(product);
   if (!product) redirect("/home");
   const { name, description, price, stock, category, image, sold } = product;
   return (
