@@ -1,6 +1,5 @@
 "use client";
 import { SubmitButton } from "@/components/SubmitBtn";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -16,7 +15,7 @@ export default function SignInPage() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const res = await signInAction({ email, password });
-    if (res.error) {
+    if (res?.error) {
       setError(res.error);
     }
   };
