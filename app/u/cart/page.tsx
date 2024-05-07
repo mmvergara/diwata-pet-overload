@@ -7,7 +7,7 @@ import Link from "next/link";
 const CartPage = () => {
   return (
     <main className="flex flex-col items-center justify-center gap-4 pt-[5vh] text-white">
-      <Card className="mx-4 flex w-full max-w-[500px]  flex-row flex-wrap items-center justify-around gap-4 p-4 ">
+      <Card className="mx-4 flex w-full max-w-[784px]  flex-row flex-wrap items-center justify-around gap-4 p-4 ">
         <div className="grow rounded-md bg-slate-100 p-2 font-semibold">
           Total Items: 14
         </div>
