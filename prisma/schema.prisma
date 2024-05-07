@@ -165,15 +165,13 @@ model OrderItems {
   @@unique([orderId, productId])
 }
 
-
-
-
 enum NOTIFCOLOR {
   INFO
   SUCCESS
   DANGER
   WARNING
 }
+
 model Notification {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   userId      String  @db.ObjectId
