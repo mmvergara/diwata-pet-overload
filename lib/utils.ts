@@ -1,3 +1,4 @@
+import { UserCartProducts } from "@/db/cart";
 import { CATEGORY } from "@prisma/client";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -9,6 +10,9 @@ export const cn = (...inputs: ClassValue[]) => {
 export const formatNumberComma = (num: number) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
+
+
 
 export const dbCategories = Object.values(CATEGORY);
 export const dbCategoryToFrontend = {

@@ -13,8 +13,10 @@ export const getProductById = async (id: string) => {
         id,
       },
     });
+    console.log(product);
     return product;
   } catch (error) {
+    console.log(error);
     return null;
   }
 };
