@@ -6,6 +6,19 @@ import { productFormSchema } from "@/lib/zod";
 import { CATEGORY } from "@prisma/client";
 import { redirect } from "next/navigation";
 
+export const getProductById = async (id: string) => {
+  try {
+    const product = await prisma.product.findUnique({
+      where: {
+        id,
+      },
+    });
+    return product;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const getProducts = async (page: number, limit: number = 20) => {
   const products = await prisma.product.findMany({
     skip: (page - 1) * limit,
