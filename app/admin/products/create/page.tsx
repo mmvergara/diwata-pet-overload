@@ -13,12 +13,22 @@ import {
 } from "@/components/ui/select";
 import Image from "next/image";
 import { ChangeEvent, useRef, useState } from "react";
-import { CATEGORY, ROLE } from "@prisma/client";
+import { CATEGORY } from "@prisma/client";
 import { dbCategories, dbCategoryToFrontend } from "@/lib/utils";
 import { productFormSchema } from "@/lib/zod";
 
 const CreateProductPage = () => {
   const [error, setError] = useState<string>("");
+  const [imagePreview, setImagePreview] = useState("");
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const handleImageUploadBtnClick = () => imageInputRef?.current?.click();
+  const handleImageInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
+    if (!e.target.files) return;
+    const file = e.target.files[0];
+    setImagePreview(URL.createObjectURL(file));
+    console.log(URL.createObjectURL(file));
+  };
 
   const handleAddProduct = async (formData: FormData) => {
     setError("");
@@ -34,18 +44,7 @@ const CreateProductPage = () => {
     const { error } = await productFormSchema.safeParseAsync(formValues);
     if (error) return setError(error.issues[0].message);
 
-    console.log("success")
-  };
-
-  const [imagePreview, setImagePreview] = useState("");
-  const imageInputRef = useRef<HTMLInputElement>(null);
-  const handleImageUploadBtnClick = () => imageInputRef?.current?.click();
-  const handleImageInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
-    if (!e.target.files) return;
-    const file = e.target.files[0];
-    setImagePreview(URL.createObjectURL(file));
-    console.log(URL.createObjectURL(file));
+    console.log("success");
   };
 
   return (
