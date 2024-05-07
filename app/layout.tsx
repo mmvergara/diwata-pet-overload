@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NextJS MongoDB Prisma Starter",
+  title: "Diwata Pet Overload",
   description: "NextJS MongoDB Prisma Starter with TypeScript and TailwindCSS",
 };
 
