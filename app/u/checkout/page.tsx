@@ -1,3 +1,4 @@
+import { PaymentDialog } from "@/components/PaymentDialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -40,8 +41,9 @@ const CheckoutPage = () => {
           <p className="text-sm font-semibold">Total Items: 14</p>
           <p className="text-sm font-semibold">Checkout Price: 200,000.00</p>
         </section>
-        {/*  check if there is address available in the user */}
-        <Button className="w-full grow">Place Order</Button>
+        <div>
+          <PaymentDialog />
+        </div>
       </Card>
     </main>
   );
