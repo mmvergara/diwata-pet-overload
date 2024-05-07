@@ -4,22 +4,30 @@ import { Adapter } from "next-auth/adapters";
 import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import { getUserById } from "./db/user";
+import { ROLES } from "@/types";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
+
+      if (token.role && session.user) {
+        session.user.role = token.role as ROLES;
+        session.user.avatar = token.avatar as string;
+      }
+
       return session;
     },
     async jwt({ token }) {
       if (!token.sub) return token;
       const user = await getUserById(token.sub);
-      console.log("USER", user);
+
       // if user is not found, or a server error occurs
       if (!user) return token;
 
       token.role = user.role;
+      token.image = user.avatar;
 
       return token;
     },
