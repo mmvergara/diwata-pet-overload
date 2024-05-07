@@ -1,15 +1,15 @@
 import type { NextAuthConfig } from "next-auth";
-import { signInSchema } from "./lib/zod";
 import { compare } from "bcryptjs";
 import Credentials from "next-auth/providers/credentials";
 import prisma from "./lib/prisma";
+import { signInFormSchema } from "./lib/zod";
 
 export const authConfig = {
   providers: [
     Credentials({
       async authorize(credentials) {
         // Validate the fields
-        const validatedFields = signInSchema.safeParse(credentials);
+        const validatedFields = signInFormSchema.safeParse(credentials);
         if (!validatedFields.success) {
           console.log("Invalid fields", validatedFields.error);
           return null;
