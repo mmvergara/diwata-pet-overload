@@ -3,6 +3,97 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 
+export const removeProductFromCart = async (productId: string) => {
+  const session = await auth();
+  if (!session) return null;
+
+  const userId = session.user.id;
+
+  try {
+    // get user cart
+    const userCart = await getUserCartById(userId);
+
+    // remove product from cart
+    await prisma.cartProduct.deleteMany({
+      where: {
+        cartId: userCart.id,
+        productId,
+      },
+    });
+
+    return await getUserCartProducts();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const updateUserCartProductQuantity = async (
+  productId: string,
+  add: number,
+) => {
+  const session = await auth();
+  if (!session) return null;
+
+  const userId = session.user.id;
+
+  try {
+    // get user cart
+    const userCart = await getUserCartById(userId);
+
+    // get product in cart
+    const productInCart = await prisma.cartProduct.findFirst({
+      where: {
+        cartId: userCart.id,
+        productId,
+      },
+    });
+    if (!productInCart) return null;
+
+    // update quantity
+    await prisma.cartProduct.update({
+      where: {
+        id: productInCart.id,
+      },
+      data: {
+        quantity: {
+          increment: add,
+        },
+      },
+    });
+
+    return await getUserCartProducts();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getUserCartProducts = async () => {
+  const session = await auth();
+  if (!session) return null;
+
+  const userId = session.user.id;
+
+  const res = await prisma.cart.findFirst({
+    where: {
+      userId,
+    },
+    include: {
+      items: {
+        include: {
+          product: true,
+        },
+      },
+    },
+  });
+
+  return res?.items;
+};
+
+// get the return type of getUserCartProducts
+export type UserCartProducts = Awaited<ReturnType<typeof getUserCartProducts>>;
+
 export const addProductToCart = async (productID: string) => {
   const session = await auth();
   if (!session) return { error: "You must be logged in to add items to cart." };
