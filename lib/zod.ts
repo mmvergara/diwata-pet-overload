@@ -1,7 +1,7 @@
 import * as z from "zod";
 const { object, string } = z;
 
-export const signInSchema = object({
+export const signInFormSchema = object({
   email: string({ required_error: "Email is required" })
     .min(1, "Email is required")
     .email("Invalid email"),
@@ -10,10 +10,9 @@ export const signInSchema = object({
     .min(8, "Password must be more than 8 characters")
     .max(32, "Password must be less than 32 characters"),
 });
-export type SignInValues = z.infer<typeof signInSchema>;
+export type SignInFormValues = z.infer<typeof signInFormSchema>;
 
-
-export const signUpSchema = object({
+export const signUpFormSchema = object({
   email: string({ required_error: "Email is required" })
     .min(1, "Email is required")
     .email("Invalid email"),
@@ -25,4 +24,26 @@ export const signUpSchema = object({
     .min(4, "Username is required")
     .max(32, "Username must be less than 32 characters"),
 });
-export type SignUpValues = z.infer<typeof signUpSchema>;
+export type SignUpFormValues = z.infer<typeof signUpFormSchema>;
+
+const MAX_FILE_SIZE = 2000000;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
+
+export const productFormSchema = z.object({
+  name: z.string().min(1, "Product name is required"),
+  description: z.string().min(1, "Product description is required"),
+  price: z.number().min(1, "Product price is required"),
+  quantity: z.number().min(1, "Product quantity is required"),
+  image: z
+    .any()
+    .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 2MB.`)
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpg, .jpeg, .png and .webp formats are supported.",
+    ),
+});
