@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -19,10 +18,10 @@ type Props = {
 };
 
 export function ProductCard({ product }: Props) {
-  const { name, price, image } = product;
+  const { name, price, image, id } = product;
   return (
     <Card className="min-h-[333px] min-w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
-      <Link href="/product/1">
+      <Link href={`/product/${id}`}>
         <CardHeader
           className="p-6 pb-2"
           onClick={() => {
@@ -38,7 +37,7 @@ export function ProductCard({ product }: Props) {
           />
         </CardHeader>
       </Link>
-      <Link href="/product/1">
+      <Link href={`/product/${id}`}>
         <CardContent
           className="p-6 pb-2 pt-0"
           onClick={() => {
