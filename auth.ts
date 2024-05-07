@@ -4,7 +4,7 @@ import { Adapter } from "next-auth/adapters";
 import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import { getUserById } from "./db/user";
-import { ROLES } from "@/types";
+import { ROLE } from "@prisma/client";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async session({ session, token }) {
@@ -13,7 +13,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       if (token.role && session.user) {
-        session.user.role = token.role as ROLES;
+        session.user.role = token.role as ROLE;
         session.user.avatar = token.avatar as string;
       }
 
