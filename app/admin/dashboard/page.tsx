@@ -1,3 +1,5 @@
+import { signOut } from "@/auth";
+import { SubmitButton } from "@/components/SubmitBtn";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -7,11 +9,14 @@ import {
   ShoppingCart,
   SquarePlus,
   Star,
-  Store,
 } from "lucide-react";
 import Link from "next/link";
 
 const AdminDashboardPage = async () => {
+  const handleLogout = async () => {
+    "use server";
+    await signOut({ redirectTo: "/home" });
+  };
   return (
     <main className="px-4 pb-[20vh] pt-[5vh]">
       <div className="mx-auto flex w-full max-w-[780px] items-center justify-center gap-2 pb-2">
@@ -21,10 +26,15 @@ const AdminDashboardPage = async () => {
             Add New Product <SquarePlus size={16} />
           </Button>
         </Link>
-        <Button className="order-red-500 flex max-w-[200px] grow gap-2 rounded-md border-2 border-red-500 bg-white font-medium text-red-500 hover:bg-btnWhitePri">
-          {" "}
-          Sign Out <LogOut />
-        </Button>
+        <form action={handleLogout}>
+          <SubmitButton
+            className="order-red-500 flex max-w-[200px] grow gap-2 rounded-md border-2 border-red-500 bg-white font-medium text-red-500 hover:bg-btnWhitePri"
+            type="submit"
+            pendingText="Logging out..."
+          >
+            Logout <LogOut />
+          </SubmitButton>
+        </form>
       </div>
       <section className="mx-auto flex w-full max-w-[780px] flex-wrap items-center justify-center gap-2 text-white">
         <Link href="/cart" className="grow">
