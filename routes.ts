@@ -8,4 +8,4 @@ export const authRoutes = ["/auth/sign-in", "/auth/sign-up"];
 
 export const apiAuthPrefix = "/api/auth";
 
-export const DEFAULT_LOGGED_IN_REDIRECT = "/u/dashboard";
+export const DEFAULT_LOGGED_IN_REDIRECT = "/home";
