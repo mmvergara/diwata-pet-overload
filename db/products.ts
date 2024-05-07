@@ -6,6 +6,28 @@ import { productFormSchema } from "@/lib/zod";
 import { CATEGORY } from "@prisma/client";
 import { redirect } from "next/navigation";
 
+export const getProducts = async (page: number, limit: number = 20) => {
+  const products = await prisma.product.findMany({
+    skip: (page - 1) * limit,
+    take: limit,
+  });
+  return products;
+};
+
+export const getBestSellersProducts = async (
+  page: number,
+  limit: number = 20,
+) => {
+  const products = await prisma.product.findMany({
+    skip: (page - 1) * limit,
+    take: limit,
+    orderBy: {
+      sold: "desc",
+    },
+  });
+  return products;
+};
+
 export const createProduct = async (formData: FormData) => {
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
@@ -34,6 +56,7 @@ export const createProduct = async (formData: FormData) => {
         stock: quantity,
         category,
         image: data.url,
+        sold: 0,
       },
     });
     createdProductId = res.id;
