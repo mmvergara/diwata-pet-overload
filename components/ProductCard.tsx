@@ -19,7 +19,7 @@ type Props = {
 };
 
 export function ProductCard({ product }: Props) {
-  const { name, price, image, description } = product;
+  const { name, price, image } = product;
   return (
     <Card className="min-h-[333px] min-w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
       <Link href="/product/1">
@@ -47,7 +47,9 @@ export function ProductCard({ product }: Props) {
         >
           <div className="flex justify-between">
             <p className="font-bold hover:underline">{name}</p>
-            <Badge className="bg-brownPri hover:bg-brownSec">₱ {price}.00</Badge>
+            <Badge className="bg-brownPri hover:bg-brownSec">
+              ₱ {price}.00
+            </Badge>
           </div>
           <div className="flex">
             <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
@@ -60,7 +62,7 @@ export function ProductCard({ product }: Props) {
       </Link>
 
       <CardFooter className="flex w-full">
-        <AddToCardBtn productID="1" />
+        <AddToCardBtn productID={product.id} />
       </CardFooter>
     </Card>
   );
