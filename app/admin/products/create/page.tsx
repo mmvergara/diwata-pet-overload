@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/select";
 import Image from "next/image";
 import { ChangeEvent, useRef, useState } from "react";
-import { CATEGORY } from "@prisma/client";
 import { dbCategories, dbCategoryToFrontend } from "@/lib/utils";
-import { productFormSchema } from "@/lib/zod";
+import { createProduct } from "@/db/products";
+import { SubmitButton } from "@/components/SubmitBtn";
 
 const CreateProductPage = () => {
   const [error, setError] = useState<string>("");
@@ -32,19 +32,8 @@ const CreateProductPage = () => {
 
   const handleAddProduct = async (formData: FormData) => {
     setError("");
-
-    const name = formData.get("name") as string;
-    const description = formData.get("description") as string;
-    const price = Number(formData.get("price"));
-    const quantity = Number(formData.get("quantity"));
-    const category = formData.get("category") as CATEGORY;
-    const image = (formData.get("image") as File) || null;
-
-    const formValues = { name, description, price, quantity, category, image };
-    const { error } = await productFormSchema.safeParseAsync(formValues);
-    if (error) return setError(error.issues[0].message);
-
-    console.log("success");
+    const { error } = await createProduct(formData);
+    if (error) setError(error);
   };
 
   return (
@@ -106,9 +95,9 @@ const CreateProductPage = () => {
             <ImageUp size={20} />
           </Button>
           <p className="text-red-500">{error}</p>
-          <Button type="submit" className="w-full">
+          <SubmitButton pendingText="Creating product...">
             Create Product
-          </Button>
+          </SubmitButton>
         </form>
       </Card>
     </main>
