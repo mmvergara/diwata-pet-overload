@@ -53,7 +53,11 @@ const CheckoutPage = () => {
                 {cartProduct.product.name} x{cartProduct.quantity}
               </p>
               <span className="text-xs font-medium">
-                ₱ {formatNumberComma(cartProduct.product.price)}.00
+                ₱{" "}
+                {formatNumberComma(
+                  cartProduct.product.price * cartProduct.quantity,
+                )}
+                .00
               </span>
             </div>
           ))}
@@ -66,7 +70,7 @@ const CheckoutPage = () => {
           </p>
         </section>
         <div>
-          <PaymentDialog />
+          <PaymentDialog UserCartProducts={cartProducts} />
         </div>
       </Card>
     </main>

@@ -12,7 +12,9 @@ export const formatNumberComma = (num: number) => {
 };
 
 
-
+export const strToBase64 = (str: string) => {
+  return Buffer.from(str).toString("base64");
+}
 
 export const dbCategories = Object.values(CATEGORY);
 export const dbCategoryToFrontend = {
