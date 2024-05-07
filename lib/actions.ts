@@ -1,13 +1,13 @@
 "use server";
-import { SignInValues, SignUpValues, signUpSchema } from "./zod";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { AuthError } from "next-auth";
 import { hashSync } from "bcryptjs";
 import { signIn } from "@/auth";
 import prisma from "./prisma";
 import { redirect } from "next/navigation";
+import { SignInFormValues, SignUpFormValues, signUpFormSchema } from "./zod";
 
-export const signInAction = async (signInValues: SignInValues) => {
+export const signInAction = async (signInValues: SignInFormValues) => {
   try {
     await signIn("credentials", signInValues);
   } catch (error) {
@@ -26,8 +26,8 @@ export const signInAction = async (signInValues: SignInValues) => {
   redirect("/u/dashboard");
 };
 
-export const signUpAction = async (signUpValues: SignUpValues) => {
-  const { data } = await signUpSchema.safeParseAsync(signUpValues);
+export const signUpAction = async (signUpValues: SignUpFormValues) => {
+  const { data } = await signUpFormSchema.safeParseAsync(signUpValues);
   if (!data) return { error: "Invalid data" };
   try {
     await prisma.user.create({
