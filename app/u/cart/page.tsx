@@ -56,10 +56,8 @@ const CartPage = () => {
     getCartProducts();
   }, []);
 
-  const totalQuantity = cartProducts?.reduce(
-    (acc, item) => acc + item.quantity,
-    0,
-  );
+  const totalQuantity =
+    cartProducts?.reduce((acc, item) => acc + item.quantity, 0) || 0;
   const totalPrice =
     cartProducts?.reduce(
       (acc, item) => acc + item.product.price * item.quantity,
