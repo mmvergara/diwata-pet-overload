@@ -6,7 +6,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const Navbar: React.FC = async () => {
   const session = await auth();
-  console.log({ session });
+
+  const isAdmin = session?.user.role === "ADMIN";
+  const dashboardLink = isAdmin ? "/admin/dashboard" : "/u/dashboard";
   return (
     <nav className="flex items-center justify-center bg-[#6b3614] px-4 py-2 text-white shadow-lg drop-shadow-md">
       <div className="flex h-[40px] w-full max-w-[1240px] items-center justify-between">
@@ -33,7 +35,7 @@ const Navbar: React.FC = async () => {
                   <ShoppingCart className="text-brownPri hover:text-brownSec" />
                 </Button>
               </Link>
-              <Link href="/u/dashboard">
+              <Link href={dashboardLink}>
                 <Avatar className="max-h-[35px] max-w-[35px] ">
                   <AvatarImage src={session.user.image} />
                   <AvatarFallback className="text-md text-brownPri shadow-md hover:text-brownSec">
