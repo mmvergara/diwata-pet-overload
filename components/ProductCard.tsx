@@ -8,12 +8,18 @@ import {
 } from "@/components/ui/card";
 
 import Image from "next/image";
-import { ShoppingCartIcon, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import { Badge } from "./ui/badge";
 import Link from "next/link";
 import { AddToCardBtn } from "./AddToCartBtn";
+import { Product } from "@prisma/client";
 
-export function ProductCard() {
+type Props = {
+  product: Product;
+};
+
+export function ProductCard({ product }: Props) {
+  const { name, price, image, description } = product;
   return (
     <Card className="min-h-[333px] min-w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
       <Link href="/product/1">
@@ -24,7 +30,7 @@ export function ProductCard() {
           }}
         >
           <Image
-            src="https://utfs.io/f/5d3ca213-6a52-4733-9be3-6ce3fb82f921-g0gqe4.jpg"
+            src={image}
             width={300}
             height={300}
             alt="Project Image"
@@ -40,8 +46,8 @@ export function ProductCard() {
           }}
         >
           <div className="flex justify-between">
-            <p className="font-bold hover:underline">Blue Collar</p>
-            <Badge className="bg-brownPri hover:bg-brownSec">₱ 300.00</Badge>
+            <p className="font-bold hover:underline">{name}</p>
+            <Badge className="bg-brownPri hover:bg-brownSec">₱ {price}.00</Badge>
           </div>
           <div className="flex">
             <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
