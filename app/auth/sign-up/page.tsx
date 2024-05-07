@@ -1,5 +1,4 @@
 "use client";
-import { signUpSchema } from "@/lib/zod";
 import { SubmitButton } from "@/components/SubmitBtn";
 import { signUpAction } from "@/lib/actions";
 import { useState } from "react";
@@ -7,6 +6,7 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { signUpFormSchema } from "@/lib/zod";
 
 export default function SignUpPage() {
   const [error, setError] = useState<string>("");
@@ -19,7 +19,7 @@ export default function SignUpPage() {
       password: formData.get("password") as string,
     };
 
-    const { error } = await signUpSchema.safeParseAsync(formValues);
+    const { error } = await signUpFormSchema.safeParseAsync(formValues);
     if (error) return setError(error.issues[0].message);
 
     const res = await signUpAction(formValues);
