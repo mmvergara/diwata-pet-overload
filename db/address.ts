@@ -3,6 +3,7 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { addressFormSchema, productFormSchema } from "@/lib/zod";
+import { revalidatePath } from "next/cache";
 
 export const getUserAddresses = async () => {
   const session = await auth();
@@ -49,8 +50,9 @@ export const createUserAddress = async (formData: FormData) => {
         addressName,
       },
     });
-    return { error: null };
   } catch (error) {
     return { error: "Could not create address" };
   }
+  revalidatePath("/u/profile");
+  return { error: null };
 };
