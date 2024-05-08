@@ -4,11 +4,13 @@ import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { productFormSchema } from "@/lib/zod";
 
-export const getUserAddressesByUserId = async (userId: string) => {
+export const getUserAddresses = async () => {
+  const session = await auth();
+  if (!session) return null;
   try {
     return await prisma.userAddress.findMany({
       where: {
-        userId,
+        userId: session.user.id,
       },
     });
   } catch (error) {
