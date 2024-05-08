@@ -4,6 +4,24 @@ import { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } from "@/config";
 import prisma from "@/lib/prisma";
 import { strToBase64 } from "@/lib/utils";
 import { getUserAddressByAddressId } from "./address";
+import { redirect } from "next/navigation";
+
+export const getRecentOrders = async () => {
+  const session = await auth();
+  if (!session) return null;
+  try {
+    return await prisma.order.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  } catch (error) {
+    return null;
+  }
+};
 
 export const verifyPaypalOrder = async (orderId: string) => {
   const res = await fetch(
@@ -94,6 +112,5 @@ export const createOrder = async ({
       cartId,
     },
   });
-
-  return { error: null, data: order.id };
+  redirect("/u/orders");
 };
