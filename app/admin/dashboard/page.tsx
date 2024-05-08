@@ -51,7 +51,7 @@ const AdminDashboardPage = async () => {
             </CardContent>
           </Card>
         </Link>
-        <Link href="/orders" className="grow">
+        <Link href="/admin/orders" className="grow">
           <Card className="min-h-[150px]  cursor-pointer transition-all hover:bg-slate-100">
             <CardHeader className="pb-2">
               <h1 className="flex items-center gap-2 text-3xl font-semibold text-brownPri">
