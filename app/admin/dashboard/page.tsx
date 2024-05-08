@@ -37,7 +37,7 @@ const AdminDashboardPage = async () => {
         </form>
       </div>
       <section className="mx-auto flex w-full max-w-[780px] flex-wrap items-center justify-center gap-2 text-white">
-        <Link href="/cart" className="grow">
+        <Link href="/u/cart" className="grow">
           <Card className="min-h-[150px] cursor-pointer transition-all hover:bg-slate-100">
             <CardHeader className="pb-2">
               <h1 className="flex items-center gap-2 text-3xl font-semibold text-brownPri">
@@ -66,7 +66,7 @@ const AdminDashboardPage = async () => {
           </Card>
         </Link>
         {/* Profile */}
-        <Link href="/profile" className="grow">
+        <Link href="/u/profile" className="grow">
           <Card className="min-h-[150px]  cursor-pointer transition-all hover:bg-slate-100">
             <CardHeader className="pb-2">
               <h1 className="flex items-center gap-2  text-3xl font-semibold text-brownPri">
