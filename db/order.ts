@@ -32,6 +32,8 @@ export const createOrder = async (
   if (!session) return { error: "User not found", data: null };
 
   // verify paypal order
+  console.log("=====================================");
+  console.log("Verifying order....");
   const isVerifiedPaypalOrder = await verifyPaypalOrder(orderId);
   if (isVerifiedPaypalOrder) {
     return {
@@ -40,6 +42,7 @@ export const createOrder = async (
     };
   }
 
+  console.log("Getting cart products....");
   // get cart products
   const cartProducts = await prisma.cartProduct.findMany({
     where: {
@@ -56,10 +59,12 @@ export const createOrder = async (
     0,
   );
 
+  console.log("Getting address....");
   // get address
   const address = await getUserAddressByAddressId(addressId);
   if (!address) return { error: "Address not found", data: null };
 
+  console.log("Creating order....");
   // create order
   const order = await prisma.order.create({
     data: {
@@ -75,6 +80,7 @@ export const createOrder = async (
     },
   });
 
+  console.log("Deleting cart products....");
   // reset cart
   await prisma.cartProduct.deleteMany({
     where: {
