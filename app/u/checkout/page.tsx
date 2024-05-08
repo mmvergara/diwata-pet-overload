@@ -1,12 +1,18 @@
 import { PaymentDialog } from "@/components/PaymentDialog";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { getUserAddresses } from "@/db/address";
 import { getUserCartProducts } from "@/db/cart";
 import { formatNumberComma } from "@/lib/utils";
 import { ReceiptText } from "lucide-react";
 
 const CheckoutPage = async () => {
   const cartProducts = await getUserCartProducts();
+  const userAddresses = await getUserAddresses();
+  if (!userAddresses || userAddresses.length === 0) {
+    console.log("No user addresses found");
+    return <></>;
+  }
 
   const totalQuantity =
     cartProducts?.reduce((acc, item) => acc + item.quantity, 0) || 0;
@@ -47,7 +53,10 @@ const CheckoutPage = async () => {
           </p>
         </section>
         <div>
-          <PaymentDialog UserCartProducts={cartProducts} />
+          <PaymentDialog
+            userCartProducts={cartProducts}
+            userAddresses={userAddresses}
+          />
         </div>
       </Card>
     </main>
