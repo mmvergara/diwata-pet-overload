@@ -47,7 +47,7 @@ const ProfilePage = () => {
         </div>
         <div className="flex w-full flex-col rounded-md bg-gray-100 p-2">
           <div className="flex w-full items-center justify-between">
-            <div>
+          <div>
               <p className="text-md font-semibold">Addresses:</p>
             </div>
             <Button variant="outline" className="bg-gray-200 px-[10px]">
