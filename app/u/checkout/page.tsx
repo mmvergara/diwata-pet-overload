@@ -1,7 +1,7 @@
 import { PaymentDialog } from "@/components/PaymentDialog";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { UserCartProducts, getUserCartProducts } from "@/db/cart";
+import { getUserCartProducts } from "@/db/cart";
 import { formatNumberComma } from "@/lib/utils";
 import { ReceiptText } from "lucide-react";
 
@@ -17,7 +17,7 @@ const CheckoutPage = async () => {
     ) || 0;
   return (
     <main className="flex flex-col items-center justify-center gap-4 pt-[5vh] text-white">
-      <Card className="mx-4 flex w-full max-w-[300px] flex-col flex-wrap gap-4 p-4 ">
+      <Card className="mx-4 flex w-full max-w-[500px] flex-col flex-wrap gap-4 p-4 ">
         <section className="flex items-center justify-between">
           <h1 className="flex gap-2 text-2xl font-bold">Checkout</h1>
           <ReceiptText className="ml-2" />
