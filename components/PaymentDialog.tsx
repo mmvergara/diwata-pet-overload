@@ -18,13 +18,24 @@ import {
   OnApproveData,
 } from "@paypal/paypal-js";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { UserAddress } from "@prisma/client";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 type Props = {
-  UserCartProducts: UserCartProducts;
+  userCartProducts: UserCartProducts;
+  userAddresses: UserAddress[];
 };
-export function PaymentDialog({ UserCartProducts }: Props) {
-  if (UserCartProducts === null || UserCartProducts === undefined) return <></>;
+export function PaymentDialog({ userCartProducts }: Props) {
+  if (userCartProducts === null || userCartProducts === undefined) return <></>;
 
-  const items = UserCartProducts.map((product) => {
+  const items = userCartProducts.map((product) => {
     return {
       name: product.product.name,
       quantity: product.quantity.toString(),
@@ -35,10 +46,9 @@ export function PaymentDialog({ UserCartProducts }: Props) {
     };
   });
 
-  const amountValue = UserCartProducts.reduce(
-    (acc, item) => acc + item.product.price * item.quantity,
-    0,
-  ).toString();
+  const amountValue = userCartProducts
+    .reduce((acc, item) => acc + item.product.price * item.quantity, 0)
+    .toString();
 
   const onCreateOrder = (
     data: CreateOrderData,
@@ -92,6 +102,21 @@ export function PaymentDialog({ UserCartProducts }: Props) {
           <DialogTitle>Pay Using Paypal</DialogTitle>
           <DialogDescription>
             {`You will be redirected to Paypal to complete your payment.`}
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a fruit" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Fruits</SelectLabel>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                  <SelectItem value="blueberry">Blueberry</SelectItem>
+                  <SelectItem value="grapes">Grapes</SelectItem>
+                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4"></div>
