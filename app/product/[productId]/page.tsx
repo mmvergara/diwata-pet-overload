@@ -4,7 +4,7 @@ import UserReview from "@/components/UserReview";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getProductById } from "@/db/products";
-import { Link, QrCode, ShoppingCartIcon, StarIcon } from "lucide-react";
+import { Link, QrCode, StarIcon } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -41,7 +41,9 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
                 {stock} Stock Available
               </span>{" "}
               <span className="font-semibold opacity-50">|</span>
-              <span className="text-nowrap text-sm opacity-60">{sold}</span>
+              <span className="text-nowrap text-sm opacity-60">
+                {sold} Sold
+              </span>
             </div>
           </div>
 
