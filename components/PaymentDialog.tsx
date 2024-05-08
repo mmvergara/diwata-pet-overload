@@ -72,7 +72,7 @@ export function PaymentDialog({ UserCartProducts }: Props) {
     console.log(data);
     console.log(actions);
     try {
-      return actions?.order?.capture().then((details) => {
+      actions?.order?.capture().then((details) => {
         console.log(details);
         console.log(details);
         console.log(details);
