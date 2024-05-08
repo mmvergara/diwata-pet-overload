@@ -74,6 +74,7 @@ export const createOrder = async ({
   // create order
   const order = await prisma.order.create({
     data: {
+      paypalOrderId: paypalOrderId,
       address: address.fullAddress,
       userId: session.user.id,
       total: totalAmount,
