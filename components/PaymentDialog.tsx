@@ -37,6 +37,7 @@ import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { createOrder } from "@/db/order";
 import { set } from "zod";
+import { SubmitButton } from "./SubmitBtn";
 type Props = {
   userCartProducts: UserCartProducts;
   userAddresses: UserAddress[];
@@ -172,13 +173,13 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
           </PayPalScriptProvider>
 
           <form action={handleSubmitOrder}>
-            <Button
-              className="w-full"
-              onClick={handleSubmitOrder}
+            <SubmitButton
+              pendingText="Confirming Order"
               disabled={!paypalOrderId || !selectedAddress}
+              className="w-full"
             >
               Confirm Order
-            </Button>
+            </SubmitButton>
           </form>
         </DialogHeader>
       </DialogContent>
