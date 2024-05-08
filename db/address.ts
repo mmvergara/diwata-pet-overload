@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
-import { productFormSchema } from "@/lib/zod";
+import { addressFormSchema, productFormSchema } from "@/lib/zod";
 
 export const getUserAddresses = async () => {
   const session = await auth();
@@ -36,7 +36,7 @@ export const createUserAddress = async (formData: FormData) => {
 
   const formValues = { fullAddress, addressName };
 
-  const { error } = await productFormSchema.safeParseAsync(formValues);
+  const { error } = await addressFormSchema.safeParseAsync(formValues);
   if (error) return { error: error.issues[0].message };
 
   const session = await auth();
@@ -49,6 +49,7 @@ export const createUserAddress = async (formData: FormData) => {
         addressName,
       },
     });
+    return { error: null };
   } catch (error) {
     return { error: "Could not create address" };
   }
