@@ -1,10 +1,10 @@
+import { getCurrentUserData } from "@/db/user";
 import { AddAddressDialog } from "@/components/AddAddressDialog";
+import { getUserAddresses } from "@/db/address";
+import { Separator } from "@/components/ui/separator";
+import { SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { getUserAddresses } from "@/db/address";
-import { getCurrentUserData } from "@/db/user";
-import { SquarePen } from "lucide-react";
 import Image from "next/image";
 
 const ProfilePage = async () => {
