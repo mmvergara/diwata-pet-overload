@@ -13,11 +13,11 @@ export default async function Home() {
           <h1 className="text-shadow rounded-sm text-center text-lg font-bold text-white sm:text-5xl">
             <br />
             <span className="font-extrabold text-white">
-              Diwata Pet Accessories
+              Diwata Pet Overload
             </span>
           </h1>
           <p className="text-center font-semibold text-white">
-            Shop the Finest Selection of Handcrafted Pet Accessories Online
+            Shop the Finest Selection of Pet Accessories Online
           </p>
           <Input
             placeholder="Search for products"
@@ -42,9 +42,7 @@ export default async function Home() {
           <StarsIcon />
         </p>
       </div>
-      <section className="mb-4 flex flex-row flex-wrap justify-center gap-10 px-4 ">
-      
-      </section>
+      <section className="mb-4 flex flex-row flex-wrap justify-center gap-10 px-4 "></section>
     </div>
   );
 }
