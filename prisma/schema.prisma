@@ -34,6 +34,16 @@ model User {
   notifications Notification[]
   productReviews ProductReview[]
   userBoughtProducts UserBoughtProduct[]
+  userAddresses UserAddress[]
+}
+
+model UserAddress {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String  @db.ObjectId
+  addressName String
+  fullAddress     String
+
+  user User @relation(fields: [userId], references: [id])
 }
  
 model Account {
@@ -144,7 +154,8 @@ enum ORDERSTATUS {
 model Order {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   userId      String  @db.ObjectId
-  status      ORDERSTATUS
+  status      ORDERSTATUS @default(PENDING)
+  paypalOrderId String?
   total       Int
   address     String
 
