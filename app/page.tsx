@@ -19,10 +19,10 @@ export default async function Home() {
           <span className="text-sm">Elevate Your Pet's Style with</span>
           <br />
           <span className="bg-gradient-to-r from-orange-600 to-amber-300 bg-clip-text font-extrabold text-transparent">
-            Diwata Pet Accessories
+            Diwata Pet Overload
           </span>
         </h1>
-        <p>Shop the Finest Selection of Handcrafted Pet Accessories Online</p>
+        <p>Shop the Finest Selection of Pet Accessories Online</p>
         <div className="mt-8">
           <Button className="rounded-3xl bg-amber-700 px-4 py-2 font-bold text-white hover:bg-amber-600">
             <Link href="/home">Shop Now</Link>
