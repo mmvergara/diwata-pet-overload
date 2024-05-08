@@ -12,10 +12,12 @@ export const verifyPaypalOrder = async (orderId: string) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${strToBase64(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`)}`,
+        Authorization: `Basic ${strToBase64(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`)}`,
       },
     },
   );
+
+  console.log(res);
   if (res.status !== 200) {
     return true;
   }
@@ -23,18 +25,22 @@ export const verifyPaypalOrder = async (orderId: string) => {
   return false;
 };
 
-export const createOrder = async (
-  orderId: string,
-  cartId: string,
-  addressId: string,
-) => {
+export const createOrder = async ({
+  addressId,
+  cartId,
+  paypalOrderId,
+}: {
+  paypalOrderId: string;
+  cartId: string;
+  addressId: string;
+}) => {
   const session = await auth();
   if (!session) return { error: "User not found", data: null };
 
   // verify paypal order
   console.log("=====================================");
   console.log("Verifying order....");
-  const isVerifiedPaypalOrder = await verifyPaypalOrder(orderId);
+  const isVerifiedPaypalOrder = await verifyPaypalOrder(paypalOrderId);
   if (isVerifiedPaypalOrder) {
     return {
       error: "Could not verify order",
