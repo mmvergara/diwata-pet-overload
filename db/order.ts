@@ -23,6 +23,27 @@ export const getRecentOrders = async () => {
   }
 };
 
+export const getOrderById = async (orderId: string) => {
+  const session = await auth();
+  if (!session) return null;
+  //check if admin
+
+  try {
+    const order = await prisma.order.findFirst({
+      where: {
+        id: orderId,
+      },
+    });
+
+    if (!order) return null;
+    if (session.user.role === "ADMIN") return order;
+    if (order.userId !== session.user.id) return null;
+    return order;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const verifyPaypalOrder = async (orderId: string) => {
   const res = await fetch(
     `https://api.sandbox.paypal.com/v2/checkout/orders/${orderId}`,
