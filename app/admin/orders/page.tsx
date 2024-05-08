@@ -1,3 +1,4 @@
+import OrderUpdateStatus from "@/components/OrderUpdateStatus";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -9,9 +10,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getRecentOrders } from "@/db/order";
-import { StatusColors, cn, formatNumberComma } from "@/lib/utils";
-import { SquarePen } from "lucide-react";
+import { cn, formatNumberComma } from "@/lib/utils";
 import Link from "next/link";
+
+const StatusColors = {
+  PENDING: "bg-yellow-500",
+  INTRANSIT: "bg-blue-500",
+  DELIVERED: "bg-green-500",
+};
 
 const OrdersPage = async () => {
   const orders = (await getRecentOrders()) || [];
@@ -25,7 +31,7 @@ const OrdersPage = async () => {
               <TableHead className="w-[100px]">Order ID</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead className="text-center">Update Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -39,7 +45,6 @@ const OrdersPage = async () => {
                     {order.id}
                   </Link>
                 </TableCell>
-
                 <TableCell>₱{formatNumberComma(order.total)}</TableCell>
                 <TableCell>
                   <span
@@ -51,10 +56,8 @@ const OrdersPage = async () => {
                     {order.status}
                   </span>
                 </TableCell>
-                <TableCell className="text-right">
-                  <Button variant="outline" className="bg-gray-100 px-[10px]">
-                    <SquarePen size={16} />
-                  </Button>
+                <TableCell className="flex justify-center">
+                  <OrderUpdateStatus orderId={order.id} status={order.status} />
                 </TableCell>
               </TableRow>
             ))}
