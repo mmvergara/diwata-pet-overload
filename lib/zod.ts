@@ -47,3 +47,8 @@ export const productFormSchema = z.object({
       "Product Image is Required, Only .jpg, .jpeg, .png and .webp formats are supported.",
     ),
 });
+
+export const addressFormSchema = z.object({
+  addressName: z.string().min(1, "Address name is required"),
+  fullAddress: z.string().min(1, "Full address is required"),
+});
