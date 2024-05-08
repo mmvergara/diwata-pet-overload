@@ -11,6 +11,7 @@ import {
 import { getRecentOrders } from "@/db/order";
 import { StatusColors, cn, formatNumberComma } from "@/lib/utils";
 import { SquarePen } from "lucide-react";
+import Link from "next/link";
 
 const OrdersPage = async () => {
   const orders = (await getRecentOrders()) || [];
@@ -30,7 +31,14 @@ const OrdersPage = async () => {
           <TableBody>
             {orders.map((order) => (
               <TableRow key={order.id}>
-                <TableCell className="font-medium">{order.id}</TableCell>
+                <TableCell>
+                  <Link
+                    className="font-medium hover:underline"
+                    href={`/u/orders/${order.id}`}
+                  >
+                    {order.id}
+                  </Link>
+                </TableCell>
 
                 <TableCell>₱{formatNumberComma(order.total)}</TableCell>
                 <TableCell>
