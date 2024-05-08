@@ -5,10 +5,13 @@ import { getUserAddresses } from "@/db/address";
 import { getUserCartProducts } from "@/db/cart";
 import { formatNumberComma } from "@/lib/utils";
 import { ReceiptText } from "lucide-react";
+import { redirect } from "next/navigation";
 
 const CheckoutPage = async () => {
   const cartProducts = await getUserCartProducts();
   const userAddresses = (await getUserAddresses()) || [];
+
+  if (!cartProducts || cartProducts.length === 0) redirect("/u/cart");
 
   const totalQuantity =
     cartProducts?.reduce((acc, item) => acc + item.quantity, 0) || 0;
@@ -49,10 +52,12 @@ const CheckoutPage = async () => {
           </p>
         </section>
         <div>
-          <PaymentDialog
-            userCartProducts={cartProducts}
-            userAddresses={userAddresses}
-          />
+          {cartProducts && cartProducts.length > 0 && (
+            <PaymentDialog
+              userCartProducts={cartProducts}
+              userAddresses={userAddresses}
+            />
+          )}
         </div>
       </Card>
     </main>
