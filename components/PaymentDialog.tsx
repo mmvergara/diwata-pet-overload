@@ -34,6 +34,7 @@ import {
 } from "./ui/select";
 import { useState } from "react";
 import { Separator } from "./ui/separator";
+import Link from "next/link";
 type Props = {
   userCartProducts: UserCartProducts;
   userAddresses: UserAddress[];
@@ -105,7 +106,19 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="flex flex-col gap-2">
           <DialogTitle>Finalizing Order</DialogTitle>
-          <p>Select Address</p>
+          <p className="flex flex-col">
+            <span>Select Address: </span>
+            <span className="text-xs font-medium opacity-60">
+              if you don't have one address, please add one in{" "}
+              <Link
+                href="/u/profile"
+                className="font-semibold text-blue-600 underline"
+              >
+                profile page
+              </Link>
+            </span>
+          </p>
+
           <Select value={selectedAddress} onValueChange={setSelectedAddress}>
             <SelectTrigger className="mt-2 w-[250px]">
               <SelectValue placeholder="Select Address" />
