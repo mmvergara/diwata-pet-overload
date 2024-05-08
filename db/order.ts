@@ -5,6 +5,8 @@ import prisma from "@/lib/prisma";
 import { strToBase64 } from "@/lib/utils";
 import { getUserAddressByAddressId } from "./address";
 import { redirect } from "next/navigation";
+import { ORDERSTATUS } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export const getRecentOrders = async () => {
   const session = await auth();
@@ -21,6 +23,32 @@ export const getRecentOrders = async () => {
   } catch (error) {
     return null;
   }
+};
+
+export const updateOrderStatus = async (
+  orderId: string,
+  status: ORDERSTATUS,
+) => {
+  const session = await auth();
+  if (!session) return null;
+  console.log(session);
+  if (session.user.role !== "ADMIN") return null;
+
+  //check if admin
+  try {
+    await prisma.order.update({
+      where: {
+        id: orderId,
+      },
+      data: {
+        status,
+      },
+    });
+  } catch (error) {
+    return null;
+  }
+  revalidatePath("/admin/orders");
+  return true;
 };
 
 export const getOrderById = async (orderId: string) => {
