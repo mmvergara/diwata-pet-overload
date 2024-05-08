@@ -17,7 +17,11 @@ import {
   OnApproveActions,
   OnApproveData,
 } from "@paypal/paypal-js";
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import {
+  PayPalButtons,
+  PayPalScriptProvider,
+  usePayPalScriptReducer,
+} from "@paypal/react-paypal-js";
 import { UserAddress } from "@prisma/client";
 import {
   Select,
@@ -29,13 +33,14 @@ import {
   SelectValue,
 } from "./ui/select";
 import { useState } from "react";
+import { Separator } from "./ui/separator";
 type Props = {
   userCartProducts: UserCartProducts;
   userAddresses: UserAddress[];
 };
 export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
   if (userCartProducts === null || userCartProducts === undefined) return <></>;
-
+  const [paypalBtnLoading, setPaypalBtnLoading] = useState<boolean>(true);
   const [selectedAddress, setSelectedAddress] = useState<string | undefined>();
 
   const items = userCartProducts.map((product) => {
@@ -82,12 +87,9 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
     actions: OnApproveActions,
   ): Promise<void> => {
     console.log(data);
-    console.log(data);
     console.log(actions);
     try {
       actions?.order?.capture().then((details) => {
-        console.log(details);
-        console.log(details);
         console.log(details);
       });
     } catch (error) {
@@ -101,30 +103,33 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
         <Button className="w-full grow">Place Order</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Pay Using Paypal</DialogTitle>
-          <DialogDescription>
-            {`You will be redirected to Paypal to complete your payment.`}
-            <Select value={selectedAddress} onValueChange={setSelectedAddress}>
-              <SelectTrigger className="w-[250px] ">
-                <SelectValue placeholder="Select Address" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {userAddresses.map((address) => {
-                    return (
-                      <SelectItem value={address.id}>
-                        {address.fullAddress}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4"></div>
-        <DialogFooter>
+        <DialogHeader className="flex flex-col gap-2">
+          <DialogTitle>Finalizing Order</DialogTitle>
+          <p>Select Address</p>
+          <Select value={selectedAddress} onValueChange={setSelectedAddress}>
+            <SelectTrigger className="mt-2 w-[250px]">
+              <SelectValue placeholder="Select Address" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {userAddresses.map((address) => {
+                  return (
+                    <SelectItem value={address.id} key={address.id}>
+                      {address.fullAddress}
+                    </SelectItem>
+                  );
+                })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Separator className="mt-4" />
+          <p className="flex flex-col">
+            <span>Pay using Paypal </span>
+            <span className="text-xs font-medium opacity-60">
+              close and open again if the button is not showing
+            </span>
+          </p>
+
           <PayPalScriptProvider
             options={{
               clientId: NEXT_PUBLIC_PAYPAL_CLIENT_ID,
@@ -135,23 +140,11 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
             <PayPalButtons
               createOrder={onCreateOrder}
               onApprove={onApproveOrder}
-              style={{ layout: "horizontal" }}
+              style={{ layout: "horizontal", height: 40 }}
             />
           </PayPalScriptProvider>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
+        </DialogHeader>
       </DialogContent>
     </Dialog>
   );
 }
-
-[
-  {
-    field:
-      "/purchase_units/@reference_id=='default'/amount/breakdown/item_total",
-    location: "body",
-    issue: "ITEM_TOTAL_REQUIRED",
-    description:
-      "If item details are specified (items.unit_amount and items.quantity) corresponding amount.breakdown.item_total is required.",
-  },
-];
