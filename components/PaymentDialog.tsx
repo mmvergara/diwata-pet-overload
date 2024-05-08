@@ -35,13 +35,15 @@ import {
 import { useState } from "react";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
+import { createOrder } from "@/db/order";
+import { set } from "zod";
 type Props = {
   userCartProducts: UserCartProducts;
   userAddresses: UserAddress[];
 };
 export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
   if (userCartProducts === null || userCartProducts === undefined) return <></>;
-  const [paypalBtnLoading, setPaypalBtnLoading] = useState<boolean>(true);
+  const [paypalOrderId, setPaypalOrderId] = useState<string | undefined>();
   const [selectedAddress, setSelectedAddress] = useState<string | undefined>();
 
   const items = userCartProducts.map((product) => {
@@ -90,12 +92,22 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
     console.log(data);
     console.log(actions);
     try {
-      actions?.order?.capture().then((details) => {
-        console.log(details);
-      });
+      const details = await actions?.order?.capture();
+      if (!details) return;
+      setPaypalOrderId(details?.id);
     } catch (error) {
       return;
     }
+  };
+
+  const handleSubmitOrder = async () => {
+    if (!paypalOrderId || !selectedAddress) return;
+    const res = await createOrder({
+      addressId: selectedAddress,
+      cartId: userCartProducts[0].cartId,
+      paypalOrderId,
+    });
+    console.log(res);
   };
 
   return (
@@ -118,7 +130,6 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
               </Link>
             </span>
           </p>
-
           <Select value={selectedAddress} onValueChange={setSelectedAddress}>
             <SelectTrigger className="mt-2 w-[250px]">
               <SelectValue placeholder="Select Address" />
@@ -128,7 +139,7 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
                 {userAddresses.map((address) => {
                   return (
                     <SelectItem value={address.id} key={address.id}>
-                      {address.fullAddress}
+                      {address.addressName}
                     </SelectItem>
                   );
                 })}
@@ -136,13 +147,14 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
             </SelectContent>
           </Select>
           <Separator className="mt-4" />
-          <p className="flex flex-col">
-            <span>Pay using Paypal </span>
-            <span className="text-xs font-medium opacity-60">
-              close and open again if the button is not showing
-            </span>
-          </p>
-
+          {selectedAddress && (
+            <p className="flex flex-col">
+              <span>Pay using Paypal </span>
+              <span className="text-xs font-medium opacity-60">
+                close and open again if the button is not showing
+              </span>
+            </p>
+          )}
           <PayPalScriptProvider
             options={{
               clientId: NEXT_PUBLIC_PAYPAL_CLIENT_ID,
@@ -150,12 +162,24 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
               intent: "capture",
             }}
           >
-            <PayPalButtons
-              createOrder={onCreateOrder}
-              onApprove={onApproveOrder}
-              style={{ layout: "horizontal", height: 40 }}
-            />
+            {selectedAddress && (
+              <PayPalButtons
+                createOrder={onCreateOrder}
+                onApprove={onApproveOrder}
+                style={{ layout: "horizontal", height: 40 }}
+              />
+            )}
           </PayPalScriptProvider>
+
+          <form action={handleSubmitOrder}>
+            <Button
+              className="w-full"
+              onClick={handleSubmitOrder}
+              disabled={!paypalOrderId || !selectedAddress}
+            >
+              Confirm Order
+            </Button>
+          </form>
         </DialogHeader>
       </DialogContent>
     </Dialog>
