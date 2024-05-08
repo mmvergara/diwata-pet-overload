@@ -1,5 +1,21 @@
 "use server";
+import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
+
+export const getCurrentUserData = async () => {
+  const session = await auth();
+  if (!session) return null;
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      },
+    });
+    return user;
+  } catch (error) {
+    return null;
+  }
+};
 
 export const getUserById = async (id: string) => {
   try {
@@ -10,4 +26,3 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
-
