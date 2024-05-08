@@ -28,12 +28,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { useState } from "react";
 type Props = {
   userCartProducts: UserCartProducts;
   userAddresses: UserAddress[];
 };
-export function PaymentDialog({ userCartProducts }: Props) {
+export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
   if (userCartProducts === null || userCartProducts === undefined) return <></>;
+
+  const [selectedAddress, setSelectedAddress] = useState<string | undefined>();
 
   const items = userCartProducts.map((product) => {
     return {
@@ -91,7 +94,7 @@ export function PaymentDialog({ userCartProducts }: Props) {
       return;
     }
   };
-  console.log(NEXT_PUBLIC_PAYPAL_CLIENT_ID);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -102,18 +105,19 @@ export function PaymentDialog({ userCartProducts }: Props) {
           <DialogTitle>Pay Using Paypal</DialogTitle>
           <DialogDescription>
             {`You will be redirected to Paypal to complete your payment.`}
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a fruit" />
+            <Select value={selectedAddress} onValueChange={setSelectedAddress}>
+              <SelectTrigger className="w-[250px] ">
+                <SelectValue placeholder="Select Address" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                  {userAddresses.map((address) => {
+                    return (
+                      <SelectItem value={address.id}>
+                        {address.fullAddress}
+                      </SelectItem>
+                    );
+                  })}
                 </SelectGroup>
               </SelectContent>
             </Select>
