@@ -8,11 +8,7 @@ import { ReceiptText } from "lucide-react";
 
 const CheckoutPage = async () => {
   const cartProducts = await getUserCartProducts();
-  const userAddresses = await getUserAddresses();
-  if (!userAddresses || userAddresses.length === 0) {
-    console.log("No user addresses found");
-    return <></>;
-  }
+  const userAddresses = (await getUserAddresses()) || [];
 
   const totalQuantity =
     cartProducts?.reduce((acc, item) => acc + item.quantity, 0) || 0;
