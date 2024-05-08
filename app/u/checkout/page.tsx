@@ -1,35 +1,12 @@
-"use client";
 import { PaymentDialog } from "@/components/PaymentDialog";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { UserCartProducts, getUserCartProducts } from "@/db/cart";
 import { formatNumberComma } from "@/lib/utils";
 import { ReceiptText } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 
-const CheckoutPage = () => {
-  const router = useRouter();
-  const [cartProducts, setCartProducts] = useState<UserCartProducts | null>(
-    null,
-  );
-
-  const getCartProducts = async () => {
-    const cart = await getUserCartProducts();
-    if (!cart) return;
-
-    if (cart.length === 0) {
-      toast.error("Cart is empty. Redirecting to home page.");
-      router.push("/home");
-      return;
-    }
-    setCartProducts(cart);
-  };
-
-  useEffect(() => {
-    getCartProducts();
-  }, []);
+const CheckoutPage = async () => {
+  const cartProducts = await getUserCartProducts();
 
   const totalQuantity =
     cartProducts?.reduce((acc, item) => acc + item.quantity, 0) || 0;
