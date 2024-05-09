@@ -161,5 +161,5 @@ export const createOrder = async ({
       cartId,
     },
   });
-  redirect("/u/orders");
+  redirect(`/u/orders/${order.id}`);
 };
