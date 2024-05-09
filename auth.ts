@@ -5,6 +5,9 @@ import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import { getUserById } from "./db/user";
 import { ROLE } from "@prisma/client";
+
+let called = 0;
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async session({ session, token }) {
@@ -15,6 +18,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.role = token.role as ROLE;
         session.user.avatar = token.avatar as string;
       }
+
+      console.log("session called=", called++);
 
       return session;
     },
