@@ -18,8 +18,16 @@ const CartPage = () => {
     null,
   );
 
-  const handleUpdateQuantity = async (productId: string, add: number) => {
-    const updatedCart = await updateUserCartProductQuantity(productId, add);
+  const handleUpdateQuantity = async (
+    productId: string,
+    add: number,
+    forceUpdate?: number,
+  ) => {
+    const updatedCart = await updateUserCartProductQuantity(
+      productId,
+      add,
+      forceUpdate,
+    );
     if (!updatedCart) return;
 
     setCartProducts((prev) => {
@@ -27,7 +35,7 @@ const CartPage = () => {
         if (cartProduct.product.id === productId) {
           return {
             ...cartProduct,
-            quantity: cartProduct.quantity + add,
+            quantity: forceUpdate ? forceUpdate : cartProduct.quantity + add,
           };
         }
         return cartProduct;

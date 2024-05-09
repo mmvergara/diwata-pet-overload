@@ -7,6 +7,8 @@ import { getUserAddressByAddressId } from "./address";
 import { redirect } from "next/navigation";
 import { ORDERSTATUS } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { sendNewOrderNotification } from "./notification";
+import { updateProductStocksAndSold } from "./products";
 
 export const getCurrentUserRecentOrders = async () => {
   const session = await auth();
@@ -170,12 +172,21 @@ export const createOrder = async ({
     },
   });
 
-  console.log("Deleting cart products....");
   // reset cart
+  console.log("Deleting cart products....");
   await prisma.cartProduct.deleteMany({
     where: {
       cartId,
     },
   });
+
+  // send notifications to admin
+  sendNewOrderNotification(order.id);
+
+  // update product stocks and sold
+  cartProducts.forEach((cartProduct) => {
+    updateProductStocksAndSold(cartProduct.productId, cartProduct.quantity);
+  });
+
   redirect(`/u/orders/${order.id}`);
 };

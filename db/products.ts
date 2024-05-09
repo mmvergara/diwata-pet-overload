@@ -82,3 +82,26 @@ export const createProduct = async (formData: FormData) => {
   if (createdProductId) redirect(`/product/${createdProductId}`);
   return { error: null };
 };
+
+export const updateProductStocksAndSold = async (
+  productId: string,
+  quantity: number,
+) => {
+  try {
+    await prisma.product.update({
+      where: {
+        id: productId,
+      },
+      data: {
+        stock: {
+          decrement: quantity,
+        },
+        sold: {
+          increment: quantity,
+        },
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -31,6 +31,7 @@ export const removeProductFromCart = async (productId: string) => {
 export const updateUserCartProductQuantity = async (
   productId: string,
   add: number,
+  forceUpdate?: number,
 ) => {
   const session = await auth();
   if (!session) return null;
@@ -51,16 +52,27 @@ export const updateUserCartProductQuantity = async (
     if (!productInCart) return null;
 
     // update quantity
-    await prisma.cartProduct.update({
-      where: {
-        id: productInCart.id,
-      },
-      data: {
-        quantity: {
-          increment: add,
+    if (forceUpdate) {
+      await prisma.cartProduct.update({
+        where: {
+          id: productInCart.id,
         },
-      },
-    });
+        data: {
+          quantity: forceUpdate,
+        },
+      });
+    } else {
+      await prisma.cartProduct.update({
+        where: {
+          id: productInCart.id,
+        },
+        data: {
+          quantity: {
+            increment: add,
+          },
+        },
+      });
+    }
 
     return await getUserCartProducts();
   } catch (error) {
