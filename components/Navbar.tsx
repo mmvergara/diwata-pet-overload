@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { Button } from "./ui/button";
 import { ShoppingCart } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { NotificationDropdown } from "./NotificationDropdown";
 
 const Navbar: React.FC = async () => {
   const session = await auth();
@@ -34,6 +35,7 @@ const Navbar: React.FC = async () => {
                   <ShoppingCart className="text-brownPri hover:text-brownSec" />
                 </Button>
               </Link>
+              <NotificationDropdown />
               <Link href={dashboardLink}>
                 <Avatar className="max-h-[35px] max-w-[35px] ">
                   <AvatarImage src={session.user.avatar} />
