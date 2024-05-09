@@ -20,9 +20,9 @@ export const signUpFormSchema = object({
     .min(1, "Password is required")
     .min(8, "Password must be more than 8 characters")
     .max(32, "Password must be less than 32 characters"),
-  username: string({ required_error: "Username is required" })
-    .min(4, "Username is required")
-    .max(32, "Username must be less than 32 characters"),
+  fullName: string({ required_error: "Username is required" })
+    .min(4, "Fullname is required")
+    .max(32, "Fullname must be less than 32 characters"),
 });
 export type SignUpFormValues = z.infer<typeof signUpFormSchema>;
 
