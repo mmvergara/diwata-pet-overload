@@ -83,3 +83,16 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
+
+export const getAllAdminsUserId = async () => {
+  try {
+    const admins = await prisma.user.findMany({
+      where: {
+        role: "ADMIN",
+      },
+    });
+    return admins.map((admin) => admin.id);
+  } catch (error) {
+    return [];
+  }
+};
