@@ -1,10 +1,16 @@
+import { auth } from "@/auth";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getOrderById } from "@/db/order";
 import { StatusColors, cn, formatNumberComma } from "@/lib/utils";
 import { ReceiptText } from "lucide-react";
+import Link from "next/link";
 
 const OrderPage = async ({ params }: { params: { orderId: string } }) => {
+  const session = await auth();
+  if (!session) return null;
+  const isAdmin = session.user.role === "ADMIN";
   const order = await getOrderById(params.orderId);
   if (!order) return <></>;
   return (
@@ -41,6 +47,10 @@ const OrderPage = async ({ params }: { params: { orderId: string } }) => {
           <p className="text-sm font-semibold">
             Total: ₱{formatNumberComma(order.total)}.00
           </p>
+
+          <Link href={isAdmin ? `/admin/orders/` : `/u/orders/`}>
+            <Button>Back to Orders</Button>
+          </Link>
         </section>
       </Card>
     </main>
