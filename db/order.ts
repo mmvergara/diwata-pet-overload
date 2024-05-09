@@ -8,6 +8,23 @@ import { redirect } from "next/navigation";
 import { ORDERSTATUS } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
+export const getCurrentUserRecentOrders = async () => {
+  const session = await auth();
+  if (!session) return null;
+  try {
+    return await prisma.order.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  } catch (error) {
+    return null;
+  }
+};
+
 export const getRecentOrders = async () => {
   const session = await auth();
   if (!session) return null;
@@ -55,16 +72,15 @@ export const getOrderById = async (orderId: string) => {
   const session = await auth();
   if (!session) return null;
   //check if admin
-
   try {
     const order = await prisma.order.findFirst({
       where: {
         id: orderId,
       },
     });
-
     if (!order) return null;
     if (session.user.role === "ADMIN") return order;
+    console.log(order, session);
     if (order.userId !== session.user.id) return null;
     return order;
   } catch (error) {
