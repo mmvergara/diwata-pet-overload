@@ -29,7 +29,10 @@ const OrderUpdateStatus = ({ orderId, status }: Props) => {
   return (
     <Select onValueChange={(v) => handleUpdateStatus(v as ORDERSTATUS)}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder={status} defaultValue={status} />
+        <SelectValue
+          placeholder={isUpdating ? "Updating..." : status}
+          defaultValue={status}
+        />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
