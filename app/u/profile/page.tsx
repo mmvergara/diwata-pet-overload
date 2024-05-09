@@ -28,7 +28,7 @@ const ProfilePage = async () => {
           <div>
             <p className="text-md font-semibold">Profile Picture:</p>
             <Image
-              src="/hero.jpg"
+              src={userData.avatar}
               width={50}
               height={50}
               alt="hero"
