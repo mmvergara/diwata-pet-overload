@@ -26,3 +26,14 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
+
+export const updateUserFullName = async (id: string, fullName: string) => {
+  try {
+    return await prisma.user.update({
+      where: { id },
+      data: {  },
+    });
+  } catch (error) {
+    return null;
+  }
+};
