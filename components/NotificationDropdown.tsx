@@ -1,5 +1,6 @@
 import {
   Bell,
+  CircleCheck,
   Cloud,
   CreditCard,
   Github,
@@ -8,9 +9,14 @@ import {
   LogOut,
   Mail,
   MessageSquare,
+  PackageCheck,
   Plus,
   PlusCircle,
+  Receipt,
+  ReceiptText,
   Settings,
+  Star,
+  Truck,
   User,
   UserPlus,
   Users,
@@ -22,89 +28,86 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getCurrentUser10RecentNotifications } from "@/db/notification";
 
-export function NotificationDropdown() {
+const notificationIcon = {
+  NEW_ORDER: <Receipt />,
+  NEW_REVIEW: <Star />,
+  ORDER_INTRANSIT: <Truck />,
+  ORDER_DELIVERED: <PackageCheck />,
+};
+
+export async function NotificationDropdown() {
+  const notifications = (await getCurrentUser10RecentNotifications()) || [];
+  console.log(notifications);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="h-[35px] w-[35px] rounded-full p-[8px] font-bold text-brownPri shadow-md hover:text-brownSec"
+          className="h-[35px] rounded-full p-[8px] font-bold text-brownPri shadow-md hover:text-brownSec"
         >
-          <Bell />
+          1 <Bell className="h-[15px] w-[15px]" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+      <DropdownMenuContent className="w-[300px]">
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          <DropdownMenuItem className="flex items-start justify-start bg-emerald-200">
+            <PackageCheck className="mr-2 mt-1 h-4 w-4 text-emerald-800" />
+            <div className="flex flex-col">
+              <span className="font-semibold text-black">Order #1234</span>
+              <span className="text-black-800 text-sm font-medium">
+                Your order #qweqweqw has been delivered.
+              </span>
+            </div>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <CreditCard className="mr-2 h-4 w-4" />
-            <span>Billing</span>
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          <DropdownMenuItem className="flex items-start justify-start bg-amber-200">
+            <Star className="text-black-800 mr-2 mt-1 h-4 w-4" />
+            <div className="flex flex-col">
+              <span className="font-semibold text-black">New Review</span>
+              <span className="text-black-800 text-sm font-medium">
+                A New Review for your product has been posted.
+              </span>
+            </div>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          <DropdownMenuItem className="flex items-start justify-start bg-fuchsia-200">
+            <Truck className="mr-2 mt-1 h-4 w-4 text-fuchsia-800" />
+            <div className="flex flex-col">
+              <span className="text-black-900 font-semibold">
+                Order is in Transit
+              </span>
+              <span className="text-black-800 text-sm font-medium">
+                Your order #qweqweqw is now in transit.
+              </span>
+            </div>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Keyboard className="mr-2 h-4 w-4" />
-            <span>Keyboard shortcuts</span>
-            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+          <DropdownMenuItem className="flex items-start justify-start bg-cyan-200">
+            <ReceiptText className="mr-2 mt-1 h-4 w-4 text-cyan-800" />
+            <div className="flex flex-col">
+              <span className="font-semibold text-black">New Order</span>
+              <span className="text-black-800 text-sm font-medium">
+                A New Order has been placed.
+              </span>
+            </div>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem className="flex items-start justify-start bg-gray-200">
+            <PackageCheck className="mr-2 mt-1 h-4 w-4 text-gray-800" />
+            <div className="flex grow flex-col">
+              <p className="flex justify-between">
+                <span className="font-semibold text-black">New Order</span>
+                <span className="text-xs font-semibold text-gray-700">
+                  Read
+                </span>
+              </p>
+              <span className="text-black-800 text-sm font-medium">
+                A New Order has been placed.
+              </span>
+            </div>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Users className="mr-2 h-4 w-4" />
-            <span>Team</span>
-          </DropdownMenuItem>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
-              <UserPlus className="mr-2 h-4 w-4" />
-              <span>Invite users</span>
-            </DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuItem>
-                  <Mail className="mr-2 h-4 w-4" />
-                  <span>Email</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <MessageSquare className="mr-2 h-4 w-4" />
-                  <span>Message</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  <span>More...</span>
-                </DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-          <DropdownMenuItem>
-            <Plus className="mr-2 h-4 w-4" />
-            <span>New Team</span>
-            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-    
       </DropdownMenuContent>
     </DropdownMenu>
   );
