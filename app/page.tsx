@@ -1,8 +1,10 @@
+import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
+  const session = await auth();
   return (
     <div className="flex flex-wrap items-start justify-center p-8 sm:gap-10 sm:p-20">
       <section>
@@ -27,12 +29,14 @@ export default async function Home() {
           <Button className="rounded-3xl bg-amber-700 px-4 py-2 font-bold text-white hover:bg-amber-600">
             <Link href="/home">Shop Now</Link>
           </Button>
-          <Button
-            variant="link"
-            className="rounded px-4 py-2 font-bold text-amber-700"
-          >
-            <Link href="/auth/sign-in">Sign In</Link>
-          </Button>
+          {!session && (
+            <Button
+              variant="link"
+              className="rounded px-4 py-2 font-bold text-amber-700"
+            >
+              <Link href="/auth/sign-in">Sign In</Link>
+            </Button>
+          )}
         </div>
       </section>
     </div>
