@@ -58,3 +58,13 @@ export const addressFormSchema = z.object({
   addressName: z.string().min(1, "Address name is required"),
   fullAddress: z.string().min(1, "Full address is required"),
 });
+
+export const updateAvatarFormSchema = z.object({
+  image: z
+    .any()
+    .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 2MB.`)
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Product Image is Required, Only .jpg, .jpeg, .png and .webp formats are supported.",
+    ),
+});
