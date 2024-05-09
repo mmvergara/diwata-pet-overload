@@ -6,7 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const Navbar: React.FC = async () => {
   const session = await auth();
-
   const isAdmin = session?.user.role === "ADMIN";
   const dashboardLink = isAdmin ? "/admin/dashboard" : "/u/dashboard";
   return (
@@ -37,7 +36,7 @@ const Navbar: React.FC = async () => {
               </Link>
               <Link href={dashboardLink}>
                 <Avatar className="max-h-[35px] max-w-[35px] ">
-                  <AvatarImage src={session.user.image} />
+                  <AvatarImage src={session.user.avatar} />
                   <AvatarFallback className="text-md text-brownPri shadow-md hover:text-brownSec">
                     U
                   </AvatarFallback>
