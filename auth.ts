@@ -11,7 +11,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
-
       if (token.role && session.user) {
         session.user.role = token.role as ROLE;
         session.user.avatar = token.avatar as string;
@@ -25,9 +24,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       // if user is not found, or a server error occurs
       if (!user) return token;
-
       token.role = user.role;
-      token.image = user.avatar;
+      token.avatar = user.avatar;
 
       return token;
     },
