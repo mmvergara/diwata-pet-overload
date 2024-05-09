@@ -17,7 +17,7 @@ model User {
   fullName      String
   email         String         @unique
   password      String
-  avatar        String?
+  avatar        String         @default("https://utfs.io/f/17e4ff26-ae1f-4a19-a2aa-b9384a47c942-bim04p.jpg")
   accounts      Account[]
   role          ROLE           @default(USER)
 
