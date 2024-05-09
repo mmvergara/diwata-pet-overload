@@ -1,11 +1,13 @@
+import { UpdateFullnameDialog } from "@/components/dialogs/UpdateFullnameDialog";
 import { getCurrentUserData } from "@/db/user";
-import { AddAddressDialog } from "@/components/AddAddressDialog";
+import { AddAddressDialog } from "@/components/dialogs/AddAddressDialog";
 import { getUserAddresses } from "@/db/address";
 import { Separator } from "@/components/ui/separator";
 import { SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
+import { UpdateAvatarDialog } from "@/components/dialogs/UpdateAvatarDialog";
 
 const ProfilePage = async () => {
   const [userData, addressess] = await Promise.all([
@@ -35,18 +37,14 @@ const ProfilePage = async () => {
               className="shadow-xl"
             />
           </div>
-          <Button variant="outline" className="bg-gray-200 px-[10px]">
-            <SquarePen size={16} />
-          </Button>
+          <UpdateAvatarDialog />
         </div>
         <div className="mb-2 flex w-full items-center justify-between rounded-md bg-gray-100 p-2">
           <div>
             <p className="text-md font-semibold">Full Name:</p>
             <p>{userData.fullName}</p>
           </div>
-          <Button variant="outline" className="bg-gray-200 px-[10px]">
-            <SquarePen size={16} />
-          </Button>
+          <UpdateFullnameDialog />
         </div>
         <div className="mb-2 flex w-full items-center justify-between rounded-md bg-gray-100 p-2">
           <div>
