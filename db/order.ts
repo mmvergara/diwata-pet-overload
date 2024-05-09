@@ -7,7 +7,10 @@ import { getUserAddressByAddressId } from "./address";
 import { redirect } from "next/navigation";
 import { ORDERSTATUS } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { sendNewOrderNotification } from "./notification";
+import {
+  sendNewOrderNotification,
+  sendNewOrderStatusNotification,
+} from "./notification";
 import { updateProductStocksAndSold } from "./products";
 
 export const getCurrentUserRecentOrders = async () => {
@@ -66,6 +69,13 @@ export const updateOrderStatus = async (
   } catch (error) {
     return null;
   }
+
+  if (status === "INTRANSIT") {
+    sendNewOrderStatusNotification(orderId, session.user.id, "ORDER_INTRANSIT");
+  } else if (status === "DELIVERED") {
+    sendNewOrderStatusNotification(orderId, session.user.id, "ORDER_DELIVERED");
+  }
+
   revalidatePath("/admin/orders");
   return true;
 };
@@ -74,6 +84,9 @@ export const getOrderById = async (orderId: string) => {
   const session = await auth();
   if (!session) return null;
   //check if admin
+  console.log("RECEIVVED ORDER ID: ", orderId);
+  console.log("RECEIVVED ORDER ID: ", orderId);
+  console.log("RECEIVVED ORDER ID: ", orderId);
   try {
     const order = await prisma.order.findFirst({
       where: {
@@ -82,7 +95,6 @@ export const getOrderById = async (orderId: string) => {
     });
     if (!order) return null;
     if (session.user.role === "ADMIN") return order;
-    console.log(order, session);
     if (order.userId !== session.user.id) return null;
     return order;
   } catch (error) {
