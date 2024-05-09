@@ -31,6 +31,7 @@ const OrdersPage = async () => {
               <TableHead className="w-[100px]">Order ID</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Status</TableHead>
+              <TableHead>Order Date</TableHead>
               <TableHead className="text-center">Update Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -55,6 +56,9 @@ const OrdersPage = async () => {
                   >
                     {order.status}
                   </span>
+                </TableCell>
+                <TableCell>
+                  {new Date(order.createdAt).toLocaleDateString()}
                 </TableCell>
                 <TableCell className="flex justify-center">
                   <OrderUpdateStatus orderId={order.id} status={order.status} />
