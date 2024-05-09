@@ -21,8 +21,8 @@ const ProfilePage = async () => {
       <Card className="mx-4 flex w-full max-w-[1000px] flex-col  items-start p-4">
         <h2 className="text-xl font-semibold">Profile</h2>
         <p>
-          Update your profile information. You can change your name, email, and
-          profile picture here.
+          Update your profile information. You can change your name,and profile
+          picture here.
         </p>
         <Separator className="my-2" />
 
