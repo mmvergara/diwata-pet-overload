@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { ImageUp, SquarePen } from "lucide-react";
 import { ChangeEvent, useRef, useState } from "react";
 import { SubmitButton } from "../SubmitBtn";
-import { updateUserFullName } from "@/db/user";
+import { updateAvatar, updateUserFullName } from "@/db/user";
 import Image from "next/image";
 
 export function UpdateAvatarDialog() {
@@ -30,7 +30,7 @@ export function UpdateAvatarDialog() {
   };
 
   const handleUpdateAvatar = async (formData: FormData) => {
-    const res = await updateUserFullName(formData);
+    const res = await updateAvatar(formData);
     if (res.error) return setError(res.error);
     setOpen(false);
   };
