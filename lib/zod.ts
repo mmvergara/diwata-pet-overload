@@ -26,6 +26,12 @@ export const signUpFormSchema = object({
 });
 export type SignUpFormValues = z.infer<typeof signUpFormSchema>;
 
+export const updateFullnameSchema = object({
+  fullName: string({ required_error: "Username is required" })
+    .min(4, "Fullname is required")
+    .max(32, "Fullname must be less than 32 characters"),
+});
+
 const MAX_FILE_SIZE = 2000000;
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
