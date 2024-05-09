@@ -8,8 +8,12 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 
 const ProfilePage = async () => {
-  const userData = await getCurrentUserData();
-  const addressess = await getUserAddresses();
+  const [userData, addressess] = await Promise.all([
+    getCurrentUserData(),
+    getUserAddresses(),
+  ]);
+  if (!userData) return null;
+  if (!addressess) return null;
   return (
     <main className="flex flex-wrap items-center justify-center gap-4 pt-[5vh] text-white">
       <Card className="mx-4 flex w-full max-w-[1000px] flex-col  items-start p-4">
@@ -37,8 +41,8 @@ const ProfilePage = async () => {
         </div>
         <div className="mb-2 flex w-full items-center justify-between rounded-md bg-gray-100 p-2">
           <div>
-            <p className="text-md font-semibold">FullName:</p>
-            <p>{userData?.username}</p>
+            <p className="text-md font-semibold">Full Name:</p>
+            <p>{userData.fullName}</p>
           </div>
           <Button variant="outline" className="bg-gray-200 px-[10px]">
             <SquarePen size={16} />
@@ -47,7 +51,7 @@ const ProfilePage = async () => {
         <div className="mb-2 flex w-full items-center justify-between rounded-md bg-gray-100 p-2">
           <div>
             <p className="text-md font-semibold">Email:</p>
-            <p>Sam@gmail.com</p>
+            <p>{userData.email}</p>
           </div>
         </div>
         <div className="flex w-full flex-col rounded-md bg-gray-100 p-2">
