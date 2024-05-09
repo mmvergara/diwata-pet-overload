@@ -2,15 +2,37 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { utapi } from "@/lib/uploadthing";
-import { updateFullnameSchema } from "@/lib/zod";
+import { updateAvatarFormSchema, updateFullnameSchema } from "@/lib/zod";
 import { revalidatePath } from "next/cache";
 
 export const updateAvatar = async (formData: FormData) => {
-  
+  const session = await auth();
+  if (!session) return { error: "You are not authenticated" };
 
-  const [{ data, error }] = await utapi.uploadFiles([image]);
-  
-}
+  const image = (formData.get("image") as File) || null;
+
+  const { error } = await updateAvatarFormSchema.safeParseAsync({ image });
+  if (error) return { error: error.issues[0].message };
+
+  const [{ data, error: utError }] = await utapi.uploadFiles([image]);
+  if (utError || !data)
+    return { error: "An error occurred while uploading your avatar" };
+
+  try {
+    await prisma.user.update({
+      where: {
+        id: session.user.id,
+      },
+      data: {
+        avatar: data.url,
+      },
+    });
+  } catch (error) {
+    return { error: "An error occurred while updating your avatar" };
+  }
+  revalidatePath("/u/profile");
+  return { error: null };
+};
 
 export const updateUserFullName = async (formData: FormData) => {
   const session = await auth();
