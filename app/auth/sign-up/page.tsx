@@ -14,7 +14,7 @@ export default function SignUpPage() {
   const handleFormSubmit = async (formData: FormData) => {
     setError("");
     const formValues = {
-      username: formData.get("fullName") as string,
+      fullName: formData.get("fullName") as string,
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     };
