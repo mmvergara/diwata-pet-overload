@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import { reviewFormSchema } from "@/lib/zod";
 import { revalidatePath } from "next/cache";
 import { userHasBoughtProduct } from "./userBoughtProduct";
+import { sendNewReviewNotification } from "./notification";
 
 export const getProductReviews = async (productId: string) => {
   try {
@@ -66,6 +67,21 @@ export const currentUserCanReviewProduct = async (productId: string) => {
   return false;
 };
 
+export const getProductRating = async (productId: string) => {
+  try {
+    const reviews = await prisma.productReview.findMany({
+      where: {
+        productId,
+      },
+    });
+    if (reviews.length === 0) return 0;
+    const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+    return Math.round(totalRating / reviews.length);
+  } catch (error) {
+    return 0;
+  }
+};
+
 export const createProductReview = async (
   formData: FormData,
   productId: string,
@@ -83,7 +99,7 @@ export const createProductReview = async (
   if (error) return { error: error.issues[0].message };
 
   try {
-    await prisma.productReview.create({
+    const review = await prisma.productReview.create({
       data: {
         comment: reviewContent,
         rating: reviewRating,
@@ -91,6 +107,7 @@ export const createProductReview = async (
         userId: session.user.id,
       },
     });
+    if (review) sendNewReviewNotification(productId);
   } catch (error) {
     console.log(error);
     return { error: "Error creating review" };
