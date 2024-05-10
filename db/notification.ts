@@ -35,9 +35,6 @@ export const sendNewOrderStatusNotification = async (
         contentId: orderId,
       },
     });
-    console.log({ newNotif });
-    console.log({ newNotif });
-    console.log({ newNotif });
   } catch (error) {
     console.log(error);
   }
