@@ -33,11 +33,9 @@ export const getCurrentUserRecentOrders = async () => {
 export const getRecentOrders = async () => {
   const session = await auth();
   if (!session) return null;
+  if (session.user.role !== "ADMIN") return null;
   try {
     return await prisma.order.findMany({
-      where: {
-        userId: session.user.id,
-      },
       orderBy: {
         createdAt: "desc",
       },
@@ -53,12 +51,11 @@ export const updateOrderStatus = async (
 ) => {
   const session = await auth();
   if (!session) return null;
-  console.log(session);
   if (session.user.role !== "ADMIN") return null;
 
   //check if admin
   try {
-    await prisma.order.update({
+    const order = await prisma.order.update({
       where: {
         id: orderId,
       },
@@ -66,14 +63,13 @@ export const updateOrderStatus = async (
         status,
       },
     });
+    if (status === "INTRANSIT") {
+      sendNewOrderStatusNotification(orderId, order.userId, "ORDER_INTRANSIT");
+    } else if (status === "DELIVERED") {
+      sendNewOrderStatusNotification(orderId, order.userId, "ORDER_DELIVERED");
+    }
   } catch (error) {
     return null;
-  }
-
-  if (status === "INTRANSIT") {
-    sendNewOrderStatusNotification(orderId, session.user.id, "ORDER_INTRANSIT");
-  } else if (status === "DELIVERED") {
-    sendNewOrderStatusNotification(orderId, session.user.id, "ORDER_DELIVERED");
   }
 
   revalidatePath("/admin/orders");
