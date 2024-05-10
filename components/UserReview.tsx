@@ -1,43 +1,62 @@
 import { StarIcon, Trash, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
+import { ProductReview } from "@prisma/client";
+import { SubmitButton } from "./SubmitBtn";
+import { deleteProductReview } from "@/db/productReview";
 
-
-const UserReview = () => {
+type Props = {
+  ProductReview: ProductReview;
+  fullName: string;
+  avatar: string;
+  userId: string;
+};
+const UserReview = ({ ProductReview, avatar, fullName, userId }: Props) => {
+  const { comment, rating, createdAt } = ProductReview;
+  const handleDeleteReview = async () => {
+    "use server";
+    await deleteProductReview(ProductReview.id);
+  };
   return (
     <article className="[-2] mb-4 flex flex-row gap-2 rounded-md border-[1px] border-gray-200 p-4">
       <div className="mt-1">
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src={avatar} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </div>
-      <div>
-        <div className="flex justify-between">
-          <div className="flex flex-col">
-            <p className="font-semibold">Username</p>
-            <div className=" flex items-center gap-2 font-semibold">
-              <div className="flex">
-                <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-                <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-                <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-                <StarIcon size={16} className="text-amber-300" />
-                <StarIcon size={16} className="text-amber-300" />
-              </div>
-              <span className="font-semibold opacity-50">|</span>
-              <span className="text-nowrap text-sm opacity-60">
-                06/05/2024
-              </span>{" "}
+      <div className="flex grow justify-between">
+        <div className="flex flex-col">
+          <p className="font-semibold">{fullName}</p>
+          <div className=" flex items-center gap-2 font-semibold">
+            <div className="flex">
+              {Array.from({ length: 5 }, (_, i) => (
+                <StarIcon
+                  key={i}
+                  size={16}
+                  className={`${
+                    i < rating ? "text-amber-300" : "text-amber-500"
+                  }`}
+                  fill="#fbbf24"
+                />
+              ))}
             </div>
+            <span className="font-semibold opacity-50">|</span>
+            <span className="text-nowrap text-sm opacity-60">
+              {new Date(createdAt).toLocaleDateString()}
+            </span>{" "}
           </div>
-          <Button variant="ghost" className="text-red-500 hover:text-red-600">
-            <Trash2 size={16} />
-          </Button>
+          <p>{comment}</p>
         </div>
-        <p>
-          This is a review comment from a user who bought the product. It's a
-          great product and I would recommend it to anyone.
-        </p>
+        {userId === ProductReview.userId && (
+          <form action={handleDeleteReview}>
+            <SubmitButton
+              pendingText={<Trash size={16} />}
+              className="text-red-500 hover:text-red-600 bg-gray-100 hover:bg-gray-200"
+            >
+              <Trash2 size={16} />
+            </SubmitButton>
+          </form>
+        )}
       </div>
     </article>
   );
