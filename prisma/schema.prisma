@@ -111,6 +111,8 @@ model ProductReview {
   user User @relation(fields: [userId], references: [id])
 
   @@unique([productId, userId])
+
+  createdAt DateTime @default(now())
 }
 
 model UserBoughtProduct {
