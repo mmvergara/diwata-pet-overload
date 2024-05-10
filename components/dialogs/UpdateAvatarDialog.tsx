@@ -22,11 +22,9 @@ export function UpdateAvatarDialog() {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const handleImageUploadBtnClick = () => imageInputRef?.current?.click();
   const handleImageInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
     if (!e.target.files) return;
     const file = e.target.files[0];
     setImagePreview(URL.createObjectURL(file));
-    console.log(URL.createObjectURL(file));
   };
 
   const handleUpdateAvatar = async (formData: FormData) => {
