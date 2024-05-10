@@ -1,10 +1,11 @@
 import { ProductCard } from "@/components/ProductCard";
 import { StarsIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { getProducts } from "@/db/product";
+import { get20RandomProducts, getBestSellersProducts } from "@/db/product";
 
 export default async function Home() {
-  const products = await getProducts(1);
+  const bestSellerProducts = await getBestSellersProducts(1, 10);
+  const recommendedProducts = await get20RandomProducts();
   return (
     <div className=" mb-[80px] bg-orange-100">
       <section className="relative flex h-[250px] flex-col items-center overflow-hidden border-white">
@@ -32,7 +33,7 @@ export default async function Home() {
         </p>
       </div>
       <section className="mb-10 flex flex-row flex-wrap justify-center gap-10 px-4 ">
-        {products.map((product) => (
+        {bestSellerProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </section>
@@ -42,7 +43,11 @@ export default async function Home() {
           <StarsIcon />
         </p>
       </div>
-      <section className="mb-4 flex flex-row flex-wrap justify-center gap-10 px-4 "></section>
+      <section className="mb-4 flex flex-row flex-wrap justify-center gap-10 px-4 ">
+        {recommendedProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </section>
     </div>
   );
 }
