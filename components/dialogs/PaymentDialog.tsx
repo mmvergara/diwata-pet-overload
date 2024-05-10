@@ -90,8 +90,6 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
     data: OnApproveData,
     actions: OnApproveActions,
   ): Promise<void> => {
-    console.log(data);
-    console.log(actions);
     try {
       const details = await actions?.order?.capture();
       if (!details) return;
@@ -108,7 +106,6 @@ export function PaymentDialog({ userCartProducts, userAddresses }: Props) {
       cartId: userCartProducts[0].cartId,
       paypalOrderId,
     });
-    console.log(res);
   };
 
   return (
