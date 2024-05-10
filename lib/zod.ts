@@ -68,3 +68,11 @@ export const updateAvatarFormSchema = z.object({
       "Product Image is Required, Only .jpg, .jpeg, .png and .webp formats are supported.",
     ),
 });
+
+export const reviewFormSchema = z.object({
+  reviewContent: z.string().min(1, "Review content is required"),
+  reviewRating: z
+    .number()
+    .min(1, "Review rating is required")
+    .max(5, "Review rating must be less than 5"),
+});
