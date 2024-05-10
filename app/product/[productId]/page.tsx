@@ -1,18 +1,26 @@
 "use server";
+import { auth } from "@/auth";
 import { AddToCardBtn } from "@/components/AddToCartBtn";
 import CreateUserReview from "@/components/CreateUserReview";
 import UserReview from "@/components/UserReview";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getProductById } from "@/db/product";
-import { currentUserCanReviewProduct } from "@/db/productReview";
+import {
+  currentUserCanReviewProduct,
+  getProductReviews,
+} from "@/db/productReview";
 import { Link, QrCode, StarIcon } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
 const ProductPage = async ({ params }: { params: { productId: string } }) => {
+  const session = await auth();
+
   const product = await getProductById(params.productId);
   const canReview = await currentUserCanReviewProduct(params.productId);
+
+  const productReviews = await getProductReviews(params.productId);
   if (!product) redirect("/home");
   const { name, description, price, stock, category, image, sold } = product;
   return (
@@ -69,8 +77,15 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
           Here are some reviews from customers who have bought the product.
         </p>
         {canReview && <CreateUserReview productId={params.productId} />}
-        <UserReview />
-
+        {productReviews.map((review) => (
+          <UserReview
+            key={review.id}
+            ProductReview={review}
+            fullName={review.user.fullName}
+            avatar={review.user.avatar}
+            userId={session?.user.id || ""}
+          />
+        ))}
       </Card>
     </main>
   );
