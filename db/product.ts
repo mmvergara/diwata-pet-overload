@@ -80,6 +80,17 @@ export const createProduct = async (formData: FormData) => {
   return { error: null };
 };
 
+export const get20RandomProducts = async () => {
+  const products = await prisma.product.findMany({
+    take: 20,
+    orderBy: {
+      id: "desc",
+    },
+  });
+  if (!products) return [];
+  return products.sort(() => Math.random() - 0.5);
+};
+
 export const updateProductStocksAndSold = async (
   productId: string,
   quantity: number,
@@ -102,4 +113,3 @@ export const updateProductStocksAndSold = async (
     console.log(error);
   }
 };
-
