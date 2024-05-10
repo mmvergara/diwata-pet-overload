@@ -12,6 +12,7 @@ import {
   sendNewOrderStatusNotification,
 } from "./notification";
 import { updateProductStocksAndSold } from "./products";
+import { createUserBoughtProduct } from "./userBoughtProduct";
 
 export const getCurrentUserRecentOrders = async () => {
   const session = await auth();
@@ -167,7 +168,7 @@ export const createOrder = async ({
   // create order
   const order = await prisma.order.create({
     data: {
-      paypalOrderId: paypalOrderId,
+      paypalOrderId: paypalOrderId, 
       address: address.fullAddress,
       userId: session.user.id,
       total: totalAmount,
@@ -186,6 +187,10 @@ export const createOrder = async ({
     where: {
       cartId,
     },
+  });
+
+  cartProducts.forEach((cartProduct) => {
+    createUserBoughtProduct(session.user.id, cartProduct.productId);
   });
 
   // send notifications to admin
