@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { getProductById } from "@/db/product";
 import {
   currentUserCanReviewProduct,
+  getProductRating,
   getProductReviews,
 } from "@/db/productReview";
 import { Link, QrCode, StarIcon } from "lucide-react";
@@ -19,7 +20,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
 
   const product = await getProductById(params.productId);
   const canReview = await currentUserCanReviewProduct(params.productId);
-
+  const productRating = await getProductRating(params.productId);
   const productReviews = await getProductReviews(params.productId);
   if (!product) redirect("/home");
   const { name, description, price, stock, category, image, sold } = product;
@@ -40,11 +41,14 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
             <p className="text-lg font-medium opacity-90">{description}</p>
             <div className="mt-4 flex items-center gap-2 font-semibold">
               <div className="flex">
-                <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-                <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-                <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-                <StarIcon size={16} className="text-amber-300" />
-                <StarIcon size={16} className="text-amber-300" />
+                {Array.from({ length: 5 }, (_, i) => (
+                  <StarIcon
+                    key={i}
+                    size={16}
+                    className={"text-amber-300"}
+                    fill={i < productRating ? "#fbbf24" : "transparent"}
+                  />
+                ))}
               </div>
               <span className="font-semibold opacity-50">|</span>
               <span className="text-nowrap text-sm opacity-60">
