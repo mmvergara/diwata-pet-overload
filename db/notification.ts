@@ -21,20 +21,26 @@ export const getCurrentUser10RecentNotifications = async () => {
 };
 
 export const sendNewOrderStatusNotification = async (
-  userId: string,
   orderId: string,
+  userId: string,
   status: "ORDER_INTRANSIT" | "ORDER_DELIVERED",
 ) => {
-  await prisma.notification.create({
-    data: {
-      //  pascal case to human readable
-      title: `${status === "ORDER_INTRANSIT" ? "Order is in Transit" : "Order Delivered"}`,
-      content: `OrderID: #${orderId}`,
-      type: status,
-      userId: userId,
-      contentId: orderId,
-    },
-  });
+  try {
+    const newNotif = await prisma.notification.create({
+      data: {
+        title: `${status === "ORDER_INTRANSIT" ? "Order is in Transit" : "Order Delivered"}`,
+        content: `OrderID: #${orderId}`,
+        type: status,
+        userId: userId,
+        contentId: orderId,
+      },
+    });
+    console.log({ newNotif });
+    console.log({ newNotif });
+    console.log({ newNotif });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const sendNewOrderNotification = async (orderId: string) => {
