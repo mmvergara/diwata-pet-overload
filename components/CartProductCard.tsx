@@ -59,12 +59,7 @@ export function CartProductCard({
           className="rounded-md"
         />
       </CardHeader>
-      <CardContent
-        className="p-6 pb-2 pt-0"
-        onClick={() => {
-          console.log("clicked card");
-        }}
-      ></CardContent>
+      <CardContent className="p-6 pb-2 pt-0"></CardContent>
       <CardFooter className="flex w-full gap-2">
         <div className="flex grow rounded-md bg-btnWhitePri p-2 text-center text-xs font-medium">
           Quantity: {quantity}
