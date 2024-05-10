@@ -23,7 +23,6 @@ export const removeProductFromCart = async (productId: string) => {
 
     return await getUserCartProducts();
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
@@ -76,7 +75,6 @@ export const updateUserCartProductQuantity = async (
 
     return await getUserCartProducts();
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
@@ -136,7 +134,6 @@ export const addProductToCart = async (productID: string) => {
 
     return { error: null };
   } catch (error) {
-    console.log(error);
     return { error: "There was an error adding the product to your cart." };
   }
 };
