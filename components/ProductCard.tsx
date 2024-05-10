@@ -22,12 +22,7 @@ export function ProductCard({ product }: Props) {
   return (
     <Card className="min-h-[333px] min-w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
       <Link href={`/product/${id}`}>
-        <CardHeader
-          className="p-6 pb-2"
-          onClick={() => {
-            console.log("clicked card");
-          }}
-        >
+        <CardHeader className="p-6 pb-2">
           <Image
             src={image}
             width={300}
@@ -38,12 +33,7 @@ export function ProductCard({ product }: Props) {
         </CardHeader>
       </Link>
       <Link href={`/product/${id}`}>
-        <CardContent
-          className="p-6 pb-2 pt-0"
-          onClick={() => {
-            console.log("clicked card");
-          }}
-        >
+        <CardContent className="p-6 pb-2 pt-0">
           <div className="flex justify-between">
             <p className="font-bold hover:underline">{name}</p>
             <Badge className="bg-brownPri hover:bg-brownSec">
