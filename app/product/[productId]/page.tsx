@@ -14,10 +14,10 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
   if (!product) redirect("/home");
   const { name, description, price, stock, category, image, sold } = product;
   return (
-    <main className="flex flex-wrap items-center justify-center gap-4 pt-[10vh] text-white">
+    <main className="flex flex-wrap items-center justify-center gap-4 pt-[3vh] text-white">
       <Card className="mx-4 flex w-full max-w-[1000px] flex-col items-center  gap-4 p-4 md:flex-row md:items-start">
         <Image
-          src="/hero.jpg"
+          src={image}
           width={300}
           height={300}
           alt="hero"
