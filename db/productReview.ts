@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { reviewFormSchema } from "@/lib/zod";
@@ -24,6 +24,28 @@ export const getProductReviews = async (productId: string) => {
   } catch (error) {
     return [];
   }
+};
+
+export type ProductReviewWithUsers = Awaited<
+  ReturnType<typeof getProductReviews>
+>;
+
+export const deleteProductReview = async (reviewId: string) => {
+  const session = await auth();
+  if (!session) return { error: "You must be logged in to delete a review." };
+  try {
+    const res = await prisma.productReview.delete({
+      where: {
+        id: reviewId,
+        userId: session.user.id,
+      },
+    });
+    revalidatePath(`/product/${res.productId}`);
+  } catch (error) {
+    console.log(error);
+    return { error: "Error deleting review" };
+  }
+  return { error: null };
 };
 
 export const currentUserCanReviewProduct = async (productId: string) => {
