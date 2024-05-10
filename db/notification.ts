@@ -53,18 +53,15 @@ export const sendNewOrderNotification = async (orderId: string) => {
   });
 };
 
-export const sendNewReviewNotification = async (
-  reviewId: string,
-  productName: string,
-) => {
+export const sendNewReviewNotification = async (productId: string) => {
   const adminsUserIds = await getAllAdminsUserId();
   await prisma.notification.createMany({
     data: adminsUserIds.map((userId) => ({
       title: "New Review",
-      content: `New review for ${productName} has been posted.`,
+      content: `New review for ${productId} has been posted.`,
       type: "NEW_REVIEW",
       userId: userId,
-      contentId: reviewId,
+      contentId: productId,
     })),
   });
 };
