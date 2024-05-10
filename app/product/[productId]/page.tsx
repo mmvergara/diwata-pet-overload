@@ -1,16 +1,18 @@
 "use server";
 import { AddToCardBtn } from "@/components/AddToCartBtn";
+import CreateUserReview from "@/components/CreateUserReview";
 import UserReview from "@/components/UserReview";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { getProductById } from "@/db/products";
+import { getProductById } from "@/db/product";
+import { currentUserCanReviewProduct } from "@/db/productReview";
 import { Link, QrCode, StarIcon } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
 const ProductPage = async ({ params }: { params: { productId: string } }) => {
   const product = await getProductById(params.productId);
-  console.log(product);
+  const canReview = await currentUserCanReviewProduct(params.productId);
   if (!product) redirect("/home");
   const { name, description, price, stock, category, image, sold } = product;
   return (
@@ -66,10 +68,9 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
         <p className="mb-6 font-medium opacity-70">
           Here are some reviews from customers who have bought the product.
         </p>
+        {canReview && <CreateUserReview productId={params.productId} />}
         <UserReview />
-        <UserReview />
-        <UserReview />
-        <UserReview />
+
       </Card>
     </main>
   );
