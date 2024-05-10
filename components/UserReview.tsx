@@ -33,10 +33,8 @@ const UserReview = ({ ProductReview, avatar, fullName, userId }: Props) => {
                 <StarIcon
                   key={i}
                   size={16}
-                  className={`${
-                    i < rating ? "text-amber-300" : "text-amber-500"
-                  }`}
-                  fill="#fbbf24"
+                  className={"text-amber-300"}
+                  fill={i < rating ? "#fbbf24" : "transparent"}
                 />
               ))}
             </div>
@@ -51,7 +49,7 @@ const UserReview = ({ ProductReview, avatar, fullName, userId }: Props) => {
           <form action={handleDeleteReview}>
             <SubmitButton
               pendingText={<Trash size={16} />}
-              className="text-red-500 hover:text-red-600 bg-gray-100 hover:bg-gray-200"
+              className="bg-gray-100 text-red-500 hover:bg-gray-200 hover:text-red-600"
             >
               <Trash2 size={16} />
             </SubmitButton>
