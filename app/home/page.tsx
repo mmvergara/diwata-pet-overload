@@ -1,7 +1,7 @@
 import { ProductCard } from "@/components/ProductCard";
 import { StarsIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { getProducts } from "@/db/products";
+import { getProducts } from "@/db/product";
 
 export default async function Home() {
   const products = await getProducts(1);
