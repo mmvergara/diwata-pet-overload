@@ -11,7 +11,7 @@ import {
   sendNewOrderNotification,
   sendNewOrderStatusNotification,
 } from "./notification";
-import { updateProductStocksAndSold } from "./products";
+import { updateProductStocksAndSold } from "./product";
 import { createUserBoughtProduct } from "./userBoughtProduct";
 
 export const getCurrentUserRecentOrders = async () => {
@@ -81,8 +81,6 @@ export const getOrderById = async (orderId: string) => {
   const session = await auth();
   if (!session) return null;
   //check if admin
-  console.log("RECEIVVED ORDER ID: ", orderId);
-  console.log("RECEIVVED ORDER ID: ", orderId);
   console.log("RECEIVVED ORDER ID: ", orderId);
   try {
     const order = await prisma.order.findFirst({
@@ -168,7 +166,7 @@ export const createOrder = async ({
   // create order
   const order = await prisma.order.create({
     data: {
-      paypalOrderId: paypalOrderId, 
+      paypalOrderId: paypalOrderId,
       address: address.fullAddress,
       userId: session.user.id,
       total: totalAmount,
