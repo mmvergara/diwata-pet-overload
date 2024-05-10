@@ -14,7 +14,7 @@ import {
 import Image from "next/image";
 import { ChangeEvent, useRef, useState } from "react";
 import { dbCategories, dbCategoryToFrontend } from "@/lib/utils";
-import { createProduct } from "@/db/products";
+import { createProduct } from "@/db/product";
 import { SubmitButton } from "@/components/SubmitBtn";
 
 const CreateProductPage = () => {
@@ -23,11 +23,9 @@ const CreateProductPage = () => {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const handleImageUploadBtnClick = () => imageInputRef?.current?.click();
   const handleImageInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
     if (!e.target.files) return;
     const file = e.target.files[0];
     setImagePreview(URL.createObjectURL(file));
-    console.log(URL.createObjectURL(file));
   };
 
   const handleAddProduct = async (formData: FormData) => {
