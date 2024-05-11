@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { AddToCardBtn } from "@/components/AddToCartBtn";
 import CreateUserReview from "@/components/CreateUserReview";
 import UserReview from "@/components/UserReview";
+import { QrCodeDialog } from "@/components/dialogs/QrCodeDialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getProductById } from "@/db/product";
@@ -68,9 +69,7 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
               <Button className="bg-[hsl(240,5%,92%)] text-black hover:bg-[hsl(240,5%,85%)]">
                 <Link className="p-[2px]" />
               </Button>
-              <Button className="bg-[hsl(240,5%,92%)] text-black hover:bg-[hsl(240,5%,85%)]">
-                <QrCode className="p-[2px]" />
-              </Button>
+              <QrCodeDialog productId={params.productId} />
             </div>
           </div>
         </div>
