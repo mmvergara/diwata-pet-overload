@@ -52,7 +52,7 @@ export async function NotificationDropdown() {
           variant="outline"
           className="h-[35px] rounded-full p-[8px] font-bold text-brownPri shadow-md hover:text-brownSec"
         >
-          1 <Bell className="h-[15px] w-[15px]" />
+          <Bell className="h-[15px] w-[15px]" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[300px]">
