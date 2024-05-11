@@ -37,20 +37,6 @@ const AdminDashboardPage = async () => {
         </form>
       </div>
       <section className="mx-auto flex w-full max-w-[780px] flex-wrap items-center justify-center gap-2 text-white">
-        <Link href="/u/cart" className="grow">
-          <Card className="min-h-[150px] cursor-pointer transition-all hover:bg-slate-100">
-            <CardHeader className="pb-2">
-              <h1 className="flex items-center gap-2 text-3xl font-semibold text-brownPri">
-                My Cart <ShoppingCart />
-              </h1>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm font-semibold ">
-                View your cart and checkout your items
-              </p>
-            </CardContent>
-          </Card>
-        </Link>
         <Link href="/admin/orders" className="grow">
           <Card className="min-h-[150px]  cursor-pointer transition-all hover:bg-slate-100">
             <CardHeader className="pb-2">
@@ -60,7 +46,7 @@ const AdminDashboardPage = async () => {
             </CardHeader>
             <CardContent>
               <p className="text-sm font-semibold">
-                View your orders and track the status of your current orders
+                View and manage all orders
               </p>
             </CardContent>
           </Card>
@@ -80,20 +66,6 @@ const AdminDashboardPage = async () => {
             </CardContent>
           </Card>
         </Link>{" "}
-        <Link href="/profile" className="grow">
-          <Card className="min-h-[150px]  cursor-pointer transition-all hover:bg-slate-100">
-            <CardHeader className="pb-2">
-              <h1 className="flex items-center gap-2  text-3xl font-semibold text-brownPri">
-                Product Reviews <Star />
-              </h1>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm font-semibold">
-                View and update your product reviews and ratings here
-              </p>
-            </CardContent>
-          </Card>
-        </Link>
       </section>
     </main>
   );
