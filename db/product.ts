@@ -29,7 +29,7 @@ export const getProducts = async (page: number, limit: number = 20) => {
 
 export const queryProducts = async (
   query: string = "",
-  page: string = "1",
+  page: number = 1,
   limit: number = 20,
   category?: CATEGORY,
 ) => {
