@@ -30,7 +30,7 @@ const Search = async ({
         ))}{" "}
       </section>
 
-      <section className="text-center">
+      <section className="flex items-center justify-center gap-2 text-center">
         <Link
           href={`/product/search?query=${query}&${category ? `category=${category}` : ""}page=${prevPageNum}`}
         >
