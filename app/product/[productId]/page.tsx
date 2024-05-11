@@ -1,6 +1,7 @@
 "use server";
 import { auth } from "@/auth";
 import { AddToCardBtn } from "@/components/AddToCartBtn";
+import CopyLinkBtn from "@/components/CopyLinkBtn";
 import CreateUserReview from "@/components/CreateUserReview";
 import UserReview from "@/components/UserReview";
 import { QrCodeDialog } from "@/components/dialogs/QrCodeDialog";
@@ -66,9 +67,9 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
             <p className="text-2xl font-semibold ">₱ {price}.00</p>
             <div className="flex gap-2">
               <AddToCardBtn productID={params.productId} />
-              <Button className="bg-[hsl(240,5%,92%)] text-black hover:bg-[hsl(240,5%,85%)]">
-                <Link className="p-[2px]" />
-              </Button>
+              <CopyLinkBtn
+                link={`https://diwata-pet-overload.vercel.app/product/${params.productId}`}
+              />
               <QrCodeDialog productId={params.productId} />
             </div>
           </div>
