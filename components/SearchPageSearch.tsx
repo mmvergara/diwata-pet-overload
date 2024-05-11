@@ -34,7 +34,7 @@ const SearchPageSearch = ({ initialCategory, initialQuery }: Props) => {
 
   const handleSubmitQuery = (query: string, category?: CATEGORY) => {
     router.push(
-      `/product/search?query=${query}&category${category ? `category=${category}` : ""}`,
+      `/product/search?query=${query}&${category ? `category=${category}` : ""}`,
     );
   };
 
