@@ -5,7 +5,6 @@ import CopyLinkBtn from "@/components/CopyLinkBtn";
 import CreateUserReview from "@/components/CreateUserReview";
 import UserReview from "@/components/UserReview";
 import { QrCodeDialog } from "@/components/dialogs/QrCodeDialog";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { getProductById } from "@/db/product";
 import {
@@ -13,6 +12,7 @@ import {
   getProductRating,
   getProductReviews,
 } from "@/db/productReview";
+import { dbCategoryToFrontend } from "@/lib/utils";
 import { Link, QrCode, StarIcon } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -39,7 +39,9 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
         <div className="flex grow flex-col justify-between sm:h-[300px]">
           <div>
             <h2 className="text-3xl font-bold text-brownPri">{name}</h2>
-
+            <p className="w-fit rounded-lg border-[1px] border-gray-200 px-1 text-xs font-bold text-zinc-500 ">
+              {dbCategoryToFrontend[category]}
+            </p>
             <p className="text-lg font-medium opacity-90">{description}</p>
             <div className="mt-4 flex items-center gap-2 font-semibold">
               <div className="flex">

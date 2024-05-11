@@ -27,6 +27,36 @@ export const getProducts = async (page: number, limit: number = 20) => {
   return products;
 };
 
+export const queryProducts = async (
+  query: string = "",
+  page: string = "1",
+  limit: number = 20,
+  category?: CATEGORY,
+) => {
+  const products = await prisma.product.findMany({
+    where: {
+      OR: [
+        {
+          name: {
+            contains: query,
+            mode: "insensitive",
+          },
+        },
+        {
+          description: {
+            contains: query,
+            mode: "insensitive",
+          },
+        },
+      ],
+      category,
+    },
+    skip: (Number(page) - 1) * limit,
+    take: limit,
+  });
+  return products;
+};
+
 export const getBestSellersProducts = async (
   page: number,
   limit: number = 20,
