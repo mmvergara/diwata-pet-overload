@@ -2,12 +2,13 @@ import { ProductCard } from "@/components/ProductCard";
 import { StarsIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { get20RandomProducts, getBestSellersProducts } from "@/db/product";
+import HomeSearchButton from "@/components/HomeSearchBtn";
 
 export default async function Home() {
   const bestSellerProducts = await getBestSellersProducts(1, 10);
   const recommendedProducts = await get20RandomProducts();
   return (
-    <div className=" mb-[80px] bg-orange-100">
+    <div className="mb-[80px] bg-orange-100">
       <section className="relative flex h-[250px] flex-col items-center overflow-hidden border-white">
         <div className="absolute top-[-35px] h-[250px] w-[120vw] bg-gradient-to-t from-amber-200 to-orange-500 blur-xl "></div>
         <div className="absolute flex flex-col items-center">
@@ -20,10 +21,7 @@ export default async function Home() {
           <p className="text-center font-semibold text-white">
             Shop the Finest Selection of Pet Accessories Online
           </p>
-          <Input
-            placeholder="Search for products"
-            className="mt-4 w-[200px] rounded-3xl"
-          />
+          <HomeSearchButton />
         </div>
       </section>
       <div className="mb-4 flex items-center justify-center px-8 font-semibold ">
