@@ -16,9 +16,10 @@ const Search = async ({
 }) => {
   const { query, category } = searchParams;
   const page = Number(searchParams.page) || 1;
-  const products = await queryProducts(query, page, 20, category); 
-  const nextPageNum = products.length === 20 ? page + 1 : 0;
-  const prevPageNum = page - 1;
+  const products = await queryProducts(query, page, 20, category);
+  const hasMore = products.length === 20;
+  const nextPageNum = hasMore ? page + 1 : page;
+  const prevPageNum = page - 1 !== 0 ? page - 1 : 1;
 
   return (
     <main className="p-4">
@@ -29,17 +30,17 @@ const Search = async ({
         ))}{" "}
       </section>
 
-      <section>
+      <section className="text-center">
         <Link
-          href={`/product/search?query=${query}&category=${category}&page=${Number(page) - 1}`}
+          href={`/product/search?query=${query}&${category ? `category=${category}` : ""}page=${prevPageNum}`}
         >
           <Button>Previous page</Button>
         </Link>
         {page || 1}
         <Link
-          href={`/product/search?query=${query}&category=${category}&${nextPageNum && nextPageNum !== 0 && `page=${nextPageNum}`}`}
+          href={`/product/search?query=${query}&${category ? `category=${category}` : ""}page=${nextPageNum}`}
         >
-          <Button>Next page</Button>
+          <Button disabled={hasMore}>Next page</Button>
         </Link>
       </section>
     </main>
