@@ -45,7 +45,7 @@ const notificationIcon = {
 
 export async function NotificationDropdown() {
   const notifications = (await getCurrentUser10RecentNotifications()) || [];
-  return (
+  return ( 
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
