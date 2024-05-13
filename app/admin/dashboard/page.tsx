@@ -2,14 +2,7 @@ import { signOut } from "@/auth";
 import { SubmitButton } from "@/components/SubmitBtn";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import {
-  CircleUserRound,
-  ListOrdered,
-  LogOut,
-  ShoppingCart,
-  SquarePlus,
-  Star,
-} from "lucide-react";
+import { CircleUserRound, ListOrdered, LogOut, SquarePlus } from "lucide-react";
 import Link from "next/link";
 
 const AdminDashboardPage = async () => {
