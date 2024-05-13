@@ -13,7 +13,7 @@ const Navbar: React.FC = async () => {
     <nav className="flex items-center justify-center bg-[#6b3614] px-4 py-2 text-white shadow-lg drop-shadow-md">
       <div className="flex h-[40px] w-full max-w-[1240px] items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
-          logo
+          DPL
         </Link>
         <div className="font-semibold">
           {!session?.user?.email ? (
