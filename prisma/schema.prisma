@@ -107,7 +107,7 @@ model ProductReview {
   comment     String
   rating      Int
 
-  product Product @relation(fields: [productId], references: [id])
+  product Product @relation(fields: [productId], references: [id],onDelete: Cascade)
   user User @relation(fields: [userId], references: [id])
 
   @@unique([productId, userId])
@@ -120,7 +120,7 @@ model UserBoughtProduct {
   productId   String  @db.ObjectId
   userId      String  @db.ObjectId
 
-  product Product @relation(fields: [productId], references: [id])
+  product Product @relation(fields: [productId], references: [id],onDelete: Cascade)
   user User @relation(fields: [userId], references: [id])
 
   @@unique([productId, userId])
@@ -143,7 +143,7 @@ model CartProduct {
   quantity    Int
 
   cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id])
+  product Product @relation(fields: [productId], references: [id],onDelete: Cascade)
 
   @@unique([cartId, productId])
 }
@@ -177,7 +177,7 @@ model OrderItems {
   quantity    Int
 
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id])
+  product Product @relation(fields: [productId], references: [id],onDelete: Cascade)
 
   @@unique([orderId, productId])
 }
