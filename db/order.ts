@@ -199,5 +199,5 @@ export const createOrder = async ({
     updateProductStocksAndSold(cartProduct.productId, cartProduct.quantity);
   });
 
-  redirect(`/u/orders/${order.id}`);
+  redirect(`/u/orders`);
 };
