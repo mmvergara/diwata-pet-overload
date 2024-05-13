@@ -3,17 +3,18 @@ import { auth } from "@/auth";
 import { AddToCardBtn } from "@/components/AddToCartBtn";
 import CopyLinkBtn from "@/components/CopyLinkBtn";
 import CreateUserReview from "@/components/CreateUserReview";
+import { SubmitButton } from "@/components/SubmitBtn";
 import UserReview from "@/components/UserReview";
 import { QrCodeDialog } from "@/components/dialogs/QrCodeDialog";
 import { Card } from "@/components/ui/card";
-import { getProductById } from "@/db/product";
+import { deleteProductById, getProductById } from "@/db/product";
 import {
   currentUserCanReviewProduct,
   getProductRating,
   getProductReviews,
 } from "@/db/productReview";
 import { dbCategoryToFrontend } from "@/lib/utils";
-import { Link, QrCode, StarIcon } from "lucide-react";
+import { Link, QrCode, StarIcon, Trash, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -25,6 +26,12 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
   const productRating = await getProductRating(params.productId);
   const productReviews = await getProductReviews(params.productId);
   if (!product) redirect("/home");
+
+  const handleDeleteProduct = async () => {
+    "use server";
+    await deleteProductById(params.productId);
+    redirect("/home");
+  };
   const { name, description, price, stock, category, image, sold } = product;
   return (
     <main className="flex flex-wrap items-center justify-center gap-4 pt-[3vh] text-white">
@@ -73,6 +80,16 @@ const ProductPage = async ({ params }: { params: { productId: string } }) => {
                 link={`https://diwata-pet-overload.vercel.app/product/${params.productId}`}
               />
               <QrCodeDialog productId={params.productId} />
+              {session?.user.role === "ADMIN" && (
+                <form action={handleDeleteProduct}>
+                  <SubmitButton
+                    pendingText={<Trash size={16} />}
+                    className="bg-gray-100 text-red-500 hover:bg-gray-200 hover:text-red-600"
+                  >
+                    <Trash2 size={16} />
+                  </SubmitButton>
+                </form>
+              )}
             </div>
           </div>
         </div>
