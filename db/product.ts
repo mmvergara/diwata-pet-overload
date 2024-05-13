@@ -85,6 +85,19 @@ export const getBestSellersProducts = async (
   return products;
 };
 
+export const deleteProductById = async (id: string) => {
+  try {
+    await prisma.product.delete({
+      where: {
+        id,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
 export const createProduct = async (formData: FormData) => {
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
