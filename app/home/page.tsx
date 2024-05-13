@@ -32,7 +32,15 @@ export default async function Home() {
       </div>
       <section className="mb-10 flex flex-row flex-wrap justify-center gap-10 px-4 ">
         {bestSellerProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            productRating={
+              product.reviews
+                .map((review) => review.rating)
+                .reduce((a, b) => a + b, 0) / product.reviews.length
+            }
+          />
         ))}
       </section>
       <div className="text-md mb-4 flex items-center justify-center px-8 font-semibold ">
@@ -43,7 +51,15 @@ export default async function Home() {
       </div>
       <section className="mb-4 flex flex-row flex-wrap justify-center gap-10 px-4 ">
         {recommendedProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            productRating={
+              product.reviews
+                .map((review) => review.rating)
+                .reduce((a, b) => a + b, 0) / product.reviews.length
+            }
+          />
         ))}
       </section>
     </div>
