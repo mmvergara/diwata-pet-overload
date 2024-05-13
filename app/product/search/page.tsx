@@ -26,19 +26,27 @@ const Search = async ({
       <SearchPageSearch initialCategory={category} initialQuery={query} />
       <section className="mb-4 mt-4 flex flex-row flex-wrap justify-around gap-10">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            productRating={
+              product.reviews
+                .map((review) => review.rating)
+                .reduce((a, b) => a + b, 0) / product.reviews.length
+            }
+          />
         ))}{" "}
       </section>
 
       <section className="flex items-center justify-center gap-2 text-center">
         <Link
-          href={`/product/search?query=${query}&${category ? `category=${category}` : ""}page=${prevPageNum}`}
+          href={`/product/search?query=${query}&${category ? `category=${category}` : ""}&page=${prevPageNum}`}
         >
           <Button>Previous page</Button>
         </Link>
         {page || 1}
         <Link
-          href={`/product/search?query=${query}&${category ? `category=${category}` : ""}page=${nextPageNum}`}
+          href={`/product/search?query=${query}&${category ? `category=${category}` : ""}&page=${nextPageNum}`}
         >
           <Button disabled={hasMore}>Next page</Button>
         </Link>
