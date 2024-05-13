@@ -25,7 +25,6 @@ export function ProductCard({ product, productRating }: Props) {
             height={200}
             alt="Project Image"
             className="h-[250px] w-[298px] object-cover"
-            objectFit="cover"
           />
         </CardHeader>
       </Link>
