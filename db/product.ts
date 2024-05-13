@@ -51,6 +51,13 @@ export const queryProducts = async (
       ],
       category,
     },
+    include: {
+      reviews: {
+        select: {
+          rating: true,
+        },
+      },
+    },
     skip: (Number(page) - 1) * limit,
     take: limit,
   });
@@ -66,6 +73,13 @@ export const getBestSellersProducts = async (
     take: limit,
     orderBy: {
       sold: "desc",
+    },
+    include: {
+      reviews: {
+        select: {
+          rating: true,
+        },
+      },
     },
   });
   return products;
@@ -115,6 +129,13 @@ export const get20RandomProducts = async () => {
     take: 20,
     orderBy: {
       id: "desc",
+    },
+    include: {
+      reviews: {
+        select: {
+          rating: true,
+        },
+      },
     },
   });
   if (!products) return [];
