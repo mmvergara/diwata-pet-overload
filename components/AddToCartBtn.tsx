@@ -21,7 +21,10 @@ export function AddToCardBtn({ productID }: Props) {
   };
 
   return (
-    <form className="w-full" action={handleAddToCart}>
+    <form
+      className="flex h-full w-full items-end justify-end"
+      action={handleAddToCart}
+    >
       <SubmitButton
         pendingText="Adding To Cart . .  ."
         className={cn(
