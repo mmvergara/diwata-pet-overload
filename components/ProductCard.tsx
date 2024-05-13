@@ -1,10 +1,5 @@
 "use client";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import Image from "next/image";
 import { StarIcon } from "lucide-react";
@@ -15,44 +10,48 @@ import { Product } from "@prisma/client";
 
 type Props = {
   product: Product;
+  productRating: number;
 };
 
-export function ProductCard({ product }: Props) {
+export function ProductCard({ product, productRating }: Props) {
   const { name, price, image, id } = product;
   return (
-    <Card className="min-h-[333px] min-w-[300px] cursor-pointer rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
+    <Card className="flex min-h-[333px] w-[300px] cursor-pointer  flex-col rounded-xl shadow-md transition-all hover:scale-105 hover:shadow-xl">
       <Link href={`/product/${id}`}>
         <CardHeader className="p-6 pb-2">
           <Image
             src={image}
-            width={300}
-            height={300}
+            width={200}
+            height={200}
             alt="Project Image"
-            className="rounded-md"
+            className="h-[250px] w-[298px] object-cover"
+            objectFit="cover"
           />
         </CardHeader>
       </Link>
       <Link href={`/product/${id}`}>
         <CardContent className="p-6 pb-2 pt-0">
-          <div className="flex justify-between">
-            <p className="font-bold hover:underline">{name}</p>
-            <Badge className="bg-brownPri hover:bg-brownSec">
-              ₱ {price}.00
+          <div className="flex  items-start justify-between">
+            <p className="text-wrap font-bold hover:underline">{name}</p>
+            <Badge className="text-nowrap bg-brownPri text-xs hover:bg-brownSec">
+              ₱ {price}
             </Badge>
           </div>
           <div className="flex">
-            <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-            <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-            <StarIcon size={16} className="text-amber-300" fill="#fbbf24" />
-            <StarIcon size={16} className="text-amber-300" />
-            <StarIcon size={16} className="text-amber-300" />
+            {Array.from({ length: 5 }, (_, i) => (
+              <StarIcon
+                key={i}
+                size={16}
+                className={"text-amber-300"}
+                fill={i < productRating ? "#fbbf24" : "transparent"}
+              />
+            ))}
           </div>
         </CardContent>
       </Link>
-
-      <CardFooter className="flex w-full">
+      <div className="mt-auto grow p-4 px-6">
         <AddToCardBtn productID={product.id} />
-      </CardFooter>
+      </div>
     </Card>
   );
 }
